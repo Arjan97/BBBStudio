@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float tapForce = 100f;
+    public float deflateVal = -0.1f;
+    public float deflateInterval = 0.1f;
 
     public GameObject character;
 
@@ -14,6 +16,7 @@ public class Player : MonoBehaviour
 
     List<Rigidbody2D> physicsPoints;
     Coroutine gravityCoroutine;
+    Coroutine deflateCoroutine;
 
     private void Awake()
     {
@@ -31,6 +34,7 @@ public class Player : MonoBehaviour
                 physicsPoints.Add(obj.GetComponent<Rigidbody2D>());
             }
         }
+        gravityCoroutine = StartCoroutine(ChangeBubbleSize(deflateVal, deflateInterval));
     }
 
     void FixedUpdate()
@@ -54,6 +58,15 @@ public class Player : MonoBehaviour
         
         foreach (var ver in physicsPoints) {
             ver.AddForce(new Vector2(0f, -tapForce));
+        }
+    }
+
+    private IEnumerator ChangeBubbleSize(float val, float interval)
+    {
+        Vector3 scale = new Vector3(val, val, val);
+        while(true){
+            transform.localScale += scale;
+            yield return new WaitForSeconds(interval);
         }
     }
 
