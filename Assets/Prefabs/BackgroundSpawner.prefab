@@ -44,11 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f17874425ceb924486b2a0ca923e227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToSpawn: {fileID: 6146450525428548026, guid: 3ca686abce62b5f49b8ae065ed8f06af, type: 3}
-  minSpawnInterval: 3
-  maxSpawnInterval: 7
+  objectPool:
+  - {fileID: 6146450525428548026, guid: 3ca686abce62b5f49b8ae065ed8f06af, type: 3}
+  - {fileID: 6146450525428548026, guid: 8924dd629468f2942933afc0e7dfd568, type: 3}
+  - {fileID: 6146450525428548026, guid: e72c72ec0c18daf42a90506815499861, type: 3}
+  - {fileID: 6146450525428548026, guid: 2f6a19cea76425f46a4a110dc263e85d, type: 3}
+  - {fileID: 6146450525428548026, guid: de13a35b10fd1cf4883748919a59cd2d, type: 3}
+  minSpawnInterval: 4
+  maxSpawnInterval: 12
   minY: -5
   maxY: 5
   spawnXOffset: 10
   isBuilding: 1
-  fixedY: -3.78
+  yPadding: 0.3

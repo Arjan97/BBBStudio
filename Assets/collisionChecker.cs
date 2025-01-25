@@ -22,6 +22,7 @@ public class collisionChecker : MonoBehaviour
         else if (collision.CompareTag("Bubble"))
         {
             StartCoroutine(DestroyBubbleAfterDelay(collision.gameObject, 0.2f));
+            Debug.Log("Destroying " + collision.gameObject.name);
         }
         else
         {
@@ -33,6 +34,8 @@ public class collisionChecker : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         Destroy(bubble);
+        Debug.Log("Destroyed " + gameObject.name);
+
     }
 
     private void HandlePlayerCollisionWithDelay(float delay)
@@ -67,5 +70,6 @@ public class collisionChecker : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);
+        Debug.Log("Destroyed " + gameObject.name);
     }
 }
