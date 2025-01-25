@@ -1,27 +1,30 @@
 using UnityEngine;
 using System.Collections;
-public class SeaUrchin : MonoBehaviour
+
+public class SeaDevil : MonoBehaviour
 {
     public float bubbleBarReduction = 30f;
     public float attackCooldown = 1f;
 
-    private Animator animator;
     private bool canAttack = true;
-    public float detectionRange = 5f; 
-    public float attackRange = 2f;
+    public float detectionRange = 5f;
+    public float attackRange = 1f;
     private GameObject player;
+    private Animator animator;
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
-        if (animator == null)
-        {
-            Debug.LogError("Animator component not found on this object.");
-        }
+        animator = GetComponent<Animator>();
+
         if (player == null)
         {
-            Debug.LogError("Player  not found.");
+            Debug.LogError("Player not found.");
+        }
+
+        if (animator == null)
+        {
+            Debug.LogError("Animator not found on SeaDevil.");
         }
     }
 
@@ -32,7 +35,7 @@ public class SeaUrchin : MonoBehaviour
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
 
-        if (distanceToPlayer <= detectionRange && distanceToPlayer > attackRange)
+        if (distanceToPlayer <= detectionRange && distanceToPlayer > attackRange && canAttack)
         {
             TriggerAttack();
         }
@@ -40,7 +43,7 @@ public class SeaUrchin : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && canAttack)
         {
             BubbleBar bubbleBar = FindFirstObjectByType<BubbleBar>();
             if (bubbleBar != null)
@@ -53,20 +56,19 @@ public class SeaUrchin : MonoBehaviour
             AnimationController animationController = collision.GetComponent<AnimationController>();
             if (animationController != null)
             {
-                animationController.SetDeathTrigger(); 
+                animationController.SetDeathTrigger();
             }
         }
     }
 
     private void TriggerAttack()
     {
-        if (animator != null && canAttack)
+        if (animator != null)
         {
-            StartCoroutine(AttackCooldown());
-
-            animator.SetTrigger("AttackTrigger");
-
+            animator.SetTrigger("Attack");
         }
+
+        StartCoroutine(AttackCooldown());
     }
 
     private IEnumerator AttackCooldown()
