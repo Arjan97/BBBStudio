@@ -206,6 +206,62 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &187890999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 187891001}
+  - component: {fileID: 187891000}
+  m_Layer: 0
+  m_Name: SeaweedSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &187891000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187890999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f17874425ceb924486b2a0ca923e227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPool:
+  - {fileID: 6146450525428548026, guid: c940b93ebcd4edd4b91af6014eac560d, type: 3}
+  - {fileID: 6146450525428548026, guid: 595d2b20a0435a0479b4d14fc09e57ff, type: 3}
+  - {fileID: 6146450525428548026, guid: f5557bd5239668442bbb5ce52d890816, type: 3}
+  - {fileID: 6146450525428548026, guid: 8e00eb5e1d475224c9fbf2192b487463, type: 3}
+  minSpawnInterval: 2
+  maxSpawnInterval: 4
+  minY: -5
+  maxY: 5
+  spawnXOffset: 20
+  isBuilding: 1
+  buildingY: -5.2
+--- !u!4 &187891001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187890999}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &296026450
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,6 +725,7 @@ MonoBehaviour:
   scoreIncreaseRate: 50
   bubbleBonusScore: 500
   animationController: {fileID: 0}
+  se: []
 --- !u!114 &453199100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -875,7 +932,7 @@ MonoBehaviour:
   maxY: 5
   spawnXOffset: 10
   isBuilding: 0
-  yPadding: 0.3
+  buildingY: -5.2
 --- !u!4 &612488849
 Transform:
   m_ObjectHideFlags: 0
@@ -2023,7 +2080,7 @@ GameObject:
   - component: {fileID: 2071675070}
   - component: {fileID: 2071675069}
   m_Layer: 0
-  m_Name: BackgroundSpawner
+  m_Name: BuildingSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2042,18 +2099,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPool:
+  - {fileID: 6146450525428548026, guid: 73f425c9505560346b5e3b414ce90ed5, type: 3}
   - {fileID: 6146450525428548026, guid: 3ca686abce62b5f49b8ae065ed8f06af, type: 3}
-  - {fileID: 6146450525428548026, guid: 8924dd629468f2942933afc0e7dfd568, type: 3}
-  - {fileID: 6146450525428548026, guid: e72c72ec0c18daf42a90506815499861, type: 3}
-  - {fileID: 6146450525428548026, guid: 2f6a19cea76425f46a4a110dc263e85d, type: 3}
-  - {fileID: 6146450525428548026, guid: de13a35b10fd1cf4883748919a59cd2d, type: 3}
+  - {fileID: 6146450525428548026, guid: 8554d117e2d5316478239ea871f5f4d8, type: 3}
+  - {fileID: 6146450525428548026, guid: add342e37bc41094dbd96237fcec9500, type: 3}
   minSpawnInterval: 3
   maxSpawnInterval: 7
   minY: -5
   maxY: 5
-  spawnXOffset: 10
+  spawnXOffset: 20
   isBuilding: 1
-  yPadding: 0.3
+  buildingY: -5.2
 --- !u!4 &2071675070
 Transform:
   m_ObjectHideFlags: 0
@@ -2089,9 +2145,25 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4058088285175053296, guid: b9c3ccf5bdb84034f9dbc7d58a264f8f, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058088285175053296, guid: b9c3ccf5bdb84034f9dbc7d58a264f8f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 635538095
+      objectReference: {fileID: 0}
     - target: {fileID: 4714455779498952183, guid: b9c3ccf5bdb84034f9dbc7d58a264f8f, type: 3}
       propertyPath: m_FlipX
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714455779498952183, guid: b9c3ccf5bdb84034f9dbc7d58a264f8f, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714455779498952183, guid: b9c3ccf5bdb84034f9dbc7d58a264f8f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 635538095
       objectReference: {fileID: 0}
     - target: {fileID: 4952208712617385976, guid: b9c3ccf5bdb84034f9dbc7d58a264f8f, type: 3}
       propertyPath: m_Name
@@ -2166,6 +2238,7 @@ SceneRoots:
   - {fileID: 1530063898}
   - {fileID: 439514145}
   - {fileID: 2071675070}
+  - {fileID: 187891001}
   - {fileID: 612488849}
   - {fileID: 2195725887227524582}
   - {fileID: 746289848}

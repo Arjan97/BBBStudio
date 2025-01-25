@@ -42,11 +42,26 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Back
+    uniqueID: 906136781
+    locked: 0
+  - name: DirtyBack
+    uniqueID: 635538095
+    locked: 0
+  - name: Building
+    uniqueID: 3876620173
+    locked: 0
+  - name: DirtyBld
+    uniqueID: 1676663919
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Foreground
-    uniqueID: 906136781
+  - name: Grass
+    uniqueID: 3285990919
+    locked: 0
+  - name: DirtyGrass
+    uniqueID: 662992841
     locked: 0
   m_RenderingLayers:
   - Default
