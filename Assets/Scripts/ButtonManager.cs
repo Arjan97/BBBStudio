@@ -20,7 +20,7 @@ public class ButtonManager : MonoBehaviour
     public TMP_Text buttonText;
     public AnimationController animatorController;
     public float loadLevelDelay = 5f;
-
+    public bool hasStarted = false;
     public delegate void CustomButtonAction();
     public CustomButtonAction customAction;
 
@@ -67,11 +67,14 @@ public class ButtonManager : MonoBehaviour
 
     private void PlayAction()
     {
+        if (hasStarted)
+            return;
+
         if (animatorController != null)
         {
             animatorController.SetFliesAway();
         }
-
+        hasStarted = true;
         StartCoroutine(LoadLevelAfterDelay("AlphaLevel", loadLevelDelay));
     }
 
