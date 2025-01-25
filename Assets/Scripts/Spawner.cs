@@ -10,9 +10,11 @@ public class Spawner : MonoBehaviour
     public float maxY = 5f; 
     public float spawnXOffset = 10f;
     public bool isBuilding = false;
-    public float yPadding = 0.3f;
+    public float buildingY = -5.2f;
 
     private float nextSpawnTime;
+
+    private int lastRnd;
 
     private void Update()
     {
@@ -25,11 +27,15 @@ public class Spawner : MonoBehaviour
 
     private void SpawnObject()
     {
-        GameObject rndObj = objectPool[Random.Range(0, objectPool.Length - 1)];
-        float spriteShift = rndObj.GetComponent<SpriteRenderer>().bounds.size.y / 2 / rndObj.transform.localScale.x + yPadding;
-        float randomY = isBuilding ?  -spriteShift : Random.Range(minY, maxY);
+        int newRnd = Random.Range(0, objectPool.Length - 1);
+        while (objectPool.Length > 1 && newRnd == lastRnd) {
+            newRnd = Random.Range(0, objectPool.Length - 1);
+        }
+        GameObject rndObj = objectPool[newRnd];
+        lastRnd = newRnd;
+        float y = isBuilding ?  buildingY : Random.Range(minY, maxY);
 
-        Vector3 spawnPosition = new Vector3(Camera.main.transform.position.x + spawnXOffset, randomY, 0);
+        Vector3 spawnPosition = new Vector3(Camera.main.transform.position.x + spawnXOffset, y, 0);
 
         GameObject spawnedObject = Instantiate(rndObj, spawnPosition, Quaternion.identity);
     }
