@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float tapForce = 100f;
+    public float upForce = 1f;
     // public float deflateVal = -0.1f;
     // public float deflateInterval = 0.1f;
 
@@ -42,7 +43,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        bubbleRb.AddForce(new Vector2(0f, 1f));
+        bubbleRb.AddForce(new Vector2(0f, upForce));
 
         // character.rotation = Quaternion.identity;
     }
