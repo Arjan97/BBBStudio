@@ -20,8 +20,13 @@ public class BubbleBar : MonoBehaviour
 
     public AnimationController animationController;
 
+
+    public AudioClip[] se;
+    AudioSource audio;
+
     private void Start()
     {
+        audio = GetComponent<AudioSource>();
         currentValue = maxValue;
         if (bubbleSlider != null)
         {
@@ -73,6 +78,8 @@ public class BubbleBar : MonoBehaviour
         {
             bubbleSlider.value = currentValue;
         }
+        audio.resource = se[Random.Range(0, se.Length - 1)];
+        audio.Play();
     }
 
     public void AddScore(int bonus)
@@ -102,6 +109,10 @@ public class BubbleBar : MonoBehaviour
         if (animationController != null)
         {
             animationController.SetDeathTrigger();
+        }
+        if (audio.resource != se[3]) {
+            audio.resource = se[3];
+            audio.Play();
         }
         StartCoroutine(DelaySceneLoad(1f));
     }

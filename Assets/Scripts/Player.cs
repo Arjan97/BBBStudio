@@ -9,8 +9,10 @@ public class Player : MonoBehaviour
     // public float deflateInterval = 0.1f;
 
     public GameObject character;
+    public AudioClip[] se;
 
     InputSystem_Actions input;
+    AudioSource audio;
     Rigidbody2D bubbleRb;
     Rigidbody2D charRb;
 
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour
     {
         input = new InputSystem_Actions();
         input.Player.Enable();
+        audio = GetComponent<AudioSource>();
         bubbleRb = transform.GetComponent<Rigidbody2D>();
         charRb = character.GetComponent<Rigidbody2D>();
 
@@ -61,6 +64,8 @@ public class Player : MonoBehaviour
         foreach (var ver in physicsPoints) {
             ver.AddForce(new Vector2(0f, -tapForce));
         }
+        audio.resource = se[Random.Range(0, se.Length)];
+        audio.Play();
     }
 
     private IEnumerator ChangeBubbleSize(float val, float interval)
