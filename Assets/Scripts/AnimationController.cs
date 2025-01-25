@@ -15,11 +15,13 @@ public class AnimationController : MonoBehaviour
     public float colorTime = 0.5f;
 
     private Color originalColor;
+    private AudioSource audioSource;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
 
         if (spriteRenderer != null)
         {
@@ -47,7 +49,12 @@ public class AnimationController : MonoBehaviour
         if (animator != null && spriteRenderer != null)
         {
             animator.SetTrigger("Death");
-            spriteRenderer.color = hitColor; 
+            spriteRenderer.color = hitColor;
+            if (audioSource != null)
+            {
+                audioSource = GetComponent<AudioSource>();
+                audioSource.Play();
+            }
             StartCoroutine(ResetColor(colorTime));
         }
     }
