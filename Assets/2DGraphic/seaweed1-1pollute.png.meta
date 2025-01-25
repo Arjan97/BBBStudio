@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      seaweed1-1pollute_0: -2252561186430425192
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

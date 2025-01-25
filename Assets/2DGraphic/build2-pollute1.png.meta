@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      build2-pollute1_0: 7096347106032760607
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
