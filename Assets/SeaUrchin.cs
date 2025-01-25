@@ -47,6 +47,7 @@ public class SeaUrchin : MonoBehaviour
             {
                 bubbleBar.currentValue -= bubbleBarReduction;
                 bubbleBar.currentValue = Mathf.Max(bubbleBar.currentValue, 0);
+                bubbleBar.FlashBubbleBarColor();
             }
 
             AnimationController animationController = collision.GetComponent<AnimationController>();

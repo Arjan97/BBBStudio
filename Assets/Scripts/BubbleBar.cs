@@ -21,6 +21,9 @@ public class BubbleBar : MonoBehaviour
 
     public AudioClip[] se;
     private AudioSource audio;
+    private Image bubbleBarFillImage; 
+    public Color hitColor = Color.red;
+    private Color originalColor;
 
     private void Start()
     {
@@ -31,6 +34,11 @@ public class BubbleBar : MonoBehaviour
         {
             bubbleSlider.maxValue = maxValue;
             bubbleSlider.value = currentValue;
+            bubbleBarFillImage = bubbleSlider.fillRect.GetComponentInChildren<Image>();
+            if (bubbleBarFillImage != null)
+            {
+                originalColor = bubbleBarFillImage.color;
+            }
         }
 
         if (scoreText != null)
@@ -126,5 +134,23 @@ public class BubbleBar : MonoBehaviour
         }
 
         StartCoroutine(DelaySceneLoad(1f));
+    }
+
+    public void FlashBubbleBarColor()
+    {
+        if (bubbleBarFillImage != null)
+        {
+            StartCoroutine(FlashColorCoroutine());
+        }
+    }
+
+    private IEnumerator FlashColorCoroutine()
+    {
+        if (bubbleBarFillImage != null)
+        {
+            bubbleBarFillImage.color = hitColor;
+            yield return new WaitForSeconds(0.5f);
+            bubbleBarFillImage.color = originalColor;
+        }
     }
 }
