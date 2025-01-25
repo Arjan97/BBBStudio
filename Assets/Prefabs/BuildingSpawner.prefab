@@ -53,6 +53,6 @@ MonoBehaviour:
   maxSpawnInterval: 7
   minY: -5
   maxY: 5
-  spawnXOffset: 20
+  spawnXOffset: 15
   isBuilding: 1
   buildingY: -5.2
