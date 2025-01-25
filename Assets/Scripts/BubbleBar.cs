@@ -107,7 +107,7 @@ public class BubbleBar : MonoBehaviour
     private IEnumerator DelaySceneLoad(float delay)
     {
         yield return new WaitForFixedUpdate();
-        PlayerPrefs.SetInt("CurrentScore", currentScore);
+        PlayerPrefs.SetInt("CurrentScore", ScoreManager.Instance.GetScore());
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene("GameOver");
     }

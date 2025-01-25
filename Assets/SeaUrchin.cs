@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-
 public class SeaUrchin : MonoBehaviour
 {
     public float bubbleBarReduction = 30f;
@@ -41,6 +40,7 @@ public class SeaUrchin : MonoBehaviour
             bubbleBar.currentValue = Mathf.Max(bubbleBar.currentValue, 0);
         }
 
+        player.GetComponent<Animator>().SetTrigger("Death");
         StartCoroutine(AttackCooldown());
     }
 
