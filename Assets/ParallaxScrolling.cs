@@ -2,32 +2,38 @@ using UnityEngine;
 
 public class ParallaxScrolling : MonoBehaviour
 {
+    public GameObject backgroundPrefab;
     public float scrollSpeed = 0.5f;
-    private Vector3 startPosition;
-    private float resetPositionX;
+    public float resetDistance = 10f;
+
+    private GameObject currentBackground;
+    private GameObject nextBackground;
+    private float backgroundWidth;
 
     private void Start()
     {
-        startPosition = transform.position;
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        currentBackground = gameObject;
+        backgroundWidth = resetDistance;
 
-        if (spriteRenderer != null)
-        {
-            resetPositionX = startPosition.x - spriteRenderer.bounds.size.x;
-        }
-        else
-        {
-            Debug.LogError("ParallaxScrolling requires a SpriteRenderer on the same GameObject.");
-        }
+        nextBackground = Instantiate(backgroundPrefab, GetNextPosition(), Quaternion.identity);
+        nextBackground.transform.SetParent(transform.parent);
     }
 
     private void Update()
     {
         transform.position += Vector3.left * scrollSpeed * Time.deltaTime;
 
-        if (transform.position.x <= resetPositionX)
+        if (transform.position.x <= -backgroundWidth)
         {
-            transform.position = startPosition;
+            Destroy(currentBackground);
+            currentBackground = nextBackground;
+            nextBackground = Instantiate(backgroundPrefab, GetNextPosition(), Quaternion.identity);
+            nextBackground.transform.SetParent(transform.parent);
         }
+    }
+
+    private Vector3 GetNextPosition()
+    {
+        return new Vector3(currentBackground.transform.position.x + backgroundWidth, currentBackground.transform.position.y, currentBackground.transform.position.z);
     }
 }
