@@ -196,8 +196,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b866fb8e4a0dd6429be320e6b365ccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  valueToAdd: 40
-  destroyDelay: 1
 --- !u!114 &6528080535930528776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1686,7 +1684,7 @@ GameObject:
   - component: {fileID: 3010256464219319325}
   m_Layer: 0
   m_Name: ColChecker
-  m_TagString: Untagged
+  m_TagString: Bubble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1756,6 +1754,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseScore: 200
   valueToAdd: 10
+  isCeiling: 0
+  isWall: 0
 --- !u!1 &6333041595168453503
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,21 +12,20 @@ public class collisionChecker : MonoBehaviour
         if (!isCeiling && !isWall)
         {
             HandlePlayerCollisionWithDelay(0.05f);
-        } else
+        }
+        else if (isCeiling && !collision.CompareTag("Bubble"))
         {
-            if (isCeiling && !collision.CompareTag("Bubble"))
-            {
-                KillPlayer();
-            }
-
-            if (collision.CompareTag("Bubble"))
+            KillPlayer();
+        } 
+       else if (collision.CompareTag("Bubble"))
             {
                 Destroy(collision.gameObject, 0.2f);
             }
+        else
+        {
+            Debug.Log("Collision with " + collision.gameObject.name);
         }
-       
-    }
-
+        }
     private void HandlePlayerCollisionWithDelay(float delay)
     {
         ComboManager comboManager = FindFirstObjectByType<ComboManager>();
