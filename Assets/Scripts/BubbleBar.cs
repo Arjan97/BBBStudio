@@ -97,7 +97,7 @@ public class BubbleBar : MonoBehaviour
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene("GameOver");
     }
-    private void TriggerGameOver()
+    public void TriggerGameOver()
     {
         if (animationController != null)
         {
