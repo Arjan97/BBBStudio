@@ -38,9 +38,9 @@ public class Bubble : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") )
         {
-            HandlePlayerCollisionWithDelay(1f);
+            HandlePlayerCollisionWithDelay(0.05f);
             Debug.Log("Bubble collided with player");
         }
     }
