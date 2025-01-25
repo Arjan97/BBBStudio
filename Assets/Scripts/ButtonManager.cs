@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class ButtonManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class ButtonManager : MonoBehaviour
     public ButtonType buttonType;
     public Button button;
     public TMP_Text buttonText;
+    public AnimationController animatorController;
+    public float loadLevelDelay = 5f;
 
     public delegate void CustomButtonAction();
     public CustomButtonAction customAction;
@@ -60,7 +63,12 @@ public class ButtonManager : MonoBehaviour
 
     private void PlayAction()
     {
-        SceneManager.LoadScene("TestScene");
+        if (animatorController != null)
+        {
+            animatorController.SetFliesAway();
+        }
+
+        StartCoroutine(LoadLevelAfterDelay("TestScene", loadLevelDelay));
     }
 
     private void PauseAction()
@@ -72,5 +80,11 @@ public class ButtonManager : MonoBehaviour
     {
         Debug.Log("Quit button clicked!");
         Application.Quit();
+    }
+
+    IEnumerator LoadLevelAfterDelay(string sceneName, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(sceneName);
     }
 }
