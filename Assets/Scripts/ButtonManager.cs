@@ -11,6 +11,7 @@ public class ButtonManager : MonoBehaviour
         Play,
         Pause,
         Quit,
+        Retry,
         Custom
     }
 
@@ -47,6 +48,9 @@ public class ButtonManager : MonoBehaviour
             case ButtonType.Quit:
                 QuitAction();
                 break;
+            case ButtonType.Retry:
+                RetryAction();
+                break;
             case ButtonType.Custom:
                 customAction?.Invoke();
                 break;
@@ -71,6 +75,11 @@ public class ButtonManager : MonoBehaviour
         StartCoroutine(LoadLevelAfterDelay("TestScene", loadLevelDelay));
     }
 
+    private void RetryAction()
+    {
+        SceneManager.LoadScene("TestScene");
+
+    }
     private void PauseAction()
     {
         Debug.Log("Pause button clicked!");

@@ -6,7 +6,7 @@ public class AnimationController : MonoBehaviour
 
     [Header("Animator Settings")]
     public bool isStatic = false;
-
+    public bool isDead = false;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -20,12 +20,25 @@ public class AnimationController : MonoBehaviour
         {
             SetStatic(true);  
         }
+
+        if (animator != null && isDead)
+        {
+            SetStaticDeathTrigger();
+        }
     }
     public void SetDeathTrigger()
     {
         if (animator != null)
         {
             animator.SetTrigger("Death");
+        }
+    }
+
+    public void SetStaticDeathTrigger()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("staticDeath");
         }
     }
 

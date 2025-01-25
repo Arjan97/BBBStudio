@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class BubbleBar : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class BubbleBar : MonoBehaviour
     private Vector3 originalScoreTextScale;
     private float displayedScore = 0;
 
-    public TMP_Text comboPrefab;
+    public AnimationController animationController;
 
     private void Start()
     {
@@ -47,6 +48,11 @@ public class BubbleBar : MonoBehaviour
             currentValue -= decreaseRate * Time.deltaTime;
             currentValue = Mathf.Max(currentValue, 0);
         }
+        else
+        {
+            TriggerGameOver();
+        }
+
         if (bubbleSlider != null)
         {
             bubbleSlider.value = currentValue;
@@ -86,18 +92,17 @@ public class BubbleBar : MonoBehaviour
         scoreText.transform.localScale = originalScoreTextScale;
     }
 
-    private IEnumerator FlashScoreText()
+    private IEnumerator DelaySceneLoad(float delay)
     {
-        Color originalColor = scoreText.color;
-        scoreText.color = Color.yellow;
-        yield return new WaitForSeconds(0.2f);
-        scoreText.color = originalColor;
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("GameOver");
     }
-
-    private void ShowComboFeedback()
+    private void TriggerGameOver()
     {
-        TMP_Text comboText = Instantiate(comboPrefab, scoreText.transform.position, Quaternion.identity, scoreText.transform);
-        comboText.text = "Combo x2!";
-        Destroy(comboText.gameObject, 1f);
+        if (animationController != null)
+        {
+            animationController.SetDeathTrigger();
+        }
+        StartCoroutine(DelaySceneLoad(1f));
     }
 }
