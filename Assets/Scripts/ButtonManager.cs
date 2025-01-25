@@ -77,6 +77,7 @@ public class ButtonManager : MonoBehaviour
 
     private void RetryAction()
     {
+        ScoreManager.Instance.ResetScore();
         SceneManager.LoadScene("AlphaLevel");
 
     }

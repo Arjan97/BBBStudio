@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: -418347123
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1aa58e91ada32804987418be1ce3ebe7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a47e08e722ec53c4883fd92b0333fc57, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 6792269153390423037}
   - component: {fileID: 5759114168628685064}
   m_Layer: 0
-  m_Name: Building 2
+  m_Name: BrokenRoad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,7 +166,7 @@ SpriteRenderer:
   m_SortingLayerID: 1676663919
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 977fc7f029d46c547b3b169d905e3ad9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f5e72f24aac846e4880e68f51eec631c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
