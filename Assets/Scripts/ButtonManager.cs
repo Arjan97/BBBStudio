@@ -72,12 +72,12 @@ public class ButtonManager : MonoBehaviour
             animatorController.SetFliesAway();
         }
 
-        StartCoroutine(LoadLevelAfterDelay("TestScene", loadLevelDelay));
+        StartCoroutine(LoadLevelAfterDelay("AlphaLevel", loadLevelDelay));
     }
 
     private void RetryAction()
     {
-        SceneManager.LoadScene("TestScene");
+        SceneManager.LoadScene("AlphaLevel");
 
     }
     private void PauseAction()
