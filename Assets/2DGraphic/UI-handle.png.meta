@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 517cdd94226e0814787138db881ae34f
+guid: 0d21bd73c0a0770499fc3a90856839c9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1274112689567008661
-    second: UI-barfill_0
+      213: 340399603409605090
+    second: UI-handle_0
   - first:
-      213: -3052239615085843364
-    second: UI-barfill_1
+      213: -6335589027977246914
+    second: UI-handle_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -142,13 +142,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UI-barfill_0
+      name: UI-handle_0
       rect:
         serializedVersion: 2
-        x: 465
-        y: 19
-        width: 56
-        height: 839
+        x: 165
+        y: 551
+        width: 82
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,20 +157,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 59785799dbe8ea110800000000000000
-      internalID: 1274112689567008661
+      spriteID: 2e1d9e2c2a759b400800000000000000
+      internalID: 340399603409605090
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI-barfill_1
+      name: UI-handle_1
       rect:
         serializedVersion: 2
-        x: 471
-        y: 853
-        width: 9
-        height: 9
+        x: 135
+        y: 387
+        width: 146
+        height: 139
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,8 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c5cee65dd3444a5d0800000000000000
-      internalID: -3052239615085843364
+      spriteID: e37cd80b8577318a0800000000000000
+      internalID: -6335589027977246914
       vertices: []
       indices: 
       edges: []
@@ -199,8 +199,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      UI-barfill_0: 1274112689567008661
-      UI-barfill_1: -3052239615085843364
+      UI-handle_0: 340399603409605090
+      UI-handle_1: -6335589027977246914
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
