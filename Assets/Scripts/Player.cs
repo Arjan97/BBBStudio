@@ -5,7 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float tapForce = 100f;
+    public float tapImpulse = 1f;
     public float upForce = 1f;
+    public float windMagnitude = 0.02f;
     // public float deflateVal = -0.1f;
     // public float deflateInterval = 0.1f;
 
@@ -45,6 +47,10 @@ public class Player : MonoBehaviour
     {
         bubbleRb.AddForce(new Vector2(0f, upForce));
 
+        if (windMagnitude > 0) {
+            float force = -transform.localPosition.x * windMagnitude;
+            pushBubble(new Vector2(force, 0f));
+        }
         // character.rotation = Quaternion.identity;
     }
 
@@ -62,11 +68,17 @@ public class Player : MonoBehaviour
         gravityCoroutine = StartCoroutine(ChangeGravityForOneSecond());
         character.GetComponent<Animator>().SetTrigger("Drop");
         
-        foreach (var ver in physicsPoints) {
-            ver.AddForce(new Vector2(0f, -tapForce));
-        }
+        pushBubble(new Vector2(0f, -tapForce));
+        charRb.AddForce(new Vector2(0f, -tapImpulse), ForceMode2D.Impulse);
+
         audio.resource = se[Random.Range(0, se.Length)];
         audio.Play();
+    }
+
+    public void pushBubble(Vector2 dir) {
+        foreach (var ver in physicsPoints) {
+            ver.AddForce(dir);
+        }
     }
 
     private IEnumerator ChangeBubbleSize(float val, float interval)
