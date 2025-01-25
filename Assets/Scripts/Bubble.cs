@@ -12,16 +12,26 @@ public class Bubble : MonoBehaviour
     private Vector3 initialScale;
 
     private int baseScore = 200;
+    private ObjectMover objectMover;
 
     private void Start()
     {
         startPosition = transform.position;
         initialScale = transform.localScale;
+        objectMover = GetComponent<ObjectMover>();
     }
 
     private void Update()
     {
+        float xPosition = transform.position.x;
+        if (objectMover != null)
+        {
+            xPosition = transform.position.x;
+        }
         transform.position = startPosition + Vector3.up * Mathf.Sin(Time.time * floatSpeed) * floatAmplitude;
+        transform.localScale = initialScale + Vector3.one * Mathf.Sin(Time.time * scaleSpeed) * scaleAmplitude;
+
+        transform.position = new Vector3(xPosition, startPosition.y + Mathf.Sin(Time.time * floatSpeed) * floatAmplitude, startPosition.z);
         transform.localScale = initialScale + Vector3.one * Mathf.Sin(Time.time * scaleSpeed) * scaleAmplitude;
     }
 
