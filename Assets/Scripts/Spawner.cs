@@ -3,14 +3,14 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [Header("Spawn Settings")]
-    public GameObject objectToSpawn; 
+    public GameObject[] objectPool; 
     public float minSpawnInterval = 1f; 
     public float maxSpawnInterval = 3f; 
     public float minY = -5f; 
     public float maxY = 5f; 
     public float spawnXOffset = 10f;
     public bool isBuilding = false;
-    public float fixedY = 0f;
+    public float yPadding = 0.3f;
 
     private float nextSpawnTime;
 
@@ -25,9 +25,12 @@ public class Spawner : MonoBehaviour
 
     private void SpawnObject()
     {
-        float randomY = isBuilding ? fixedY : Random.Range(minY, maxY);
+        GameObject rndObj = objectPool[Random.Range(0, objectPool.Length - 1)];
+        float spriteShift = rndObj.GetComponent<SpriteRenderer>().bounds.size.y / 2 / rndObj.transform.localScale.x + yPadding;
+        float randomY = isBuilding ?  -spriteShift : Random.Range(minY, maxY);
+
         Vector3 spawnPosition = new Vector3(Camera.main.transform.position.x + spawnXOffset, randomY, 0);
 
-        GameObject spawnedObject = Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
+        GameObject spawnedObject = Instantiate(rndObj, spawnPosition, Quaternion.identity);
     }
 }
