@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
     {
         Vector3 scale = new Vector3(val, val, val);
         while(true){
-            transform.localScale += scale;
+            transform.localScale += scale * Time.deltaTime;
             yield return new WaitForSeconds(interval);
         }
     }
