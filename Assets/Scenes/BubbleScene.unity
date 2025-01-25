@@ -1222,7 +1222,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &2640891259436883762
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1403,7 +1403,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!231 &2874996289141940365
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -1438,8 +1438,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tapForce: 7
-  deflateVal: -0.3
-  deflateInterval: 0.3
   character: {fileID: 7955549870278881169}
 --- !u!50 &3012202810082817191
 Rigidbody2D:
@@ -1467,7 +1465,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!50 &3254757021673316667
 Rigidbody2D:
   serializedVersion: 5
@@ -1557,7 +1555,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!4 &3487289178771238700
 Transform:
   m_ObjectHideFlags: 0
@@ -1860,7 +1858,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!4 &4568136330560457467
 Transform:
   m_ObjectHideFlags: 0
@@ -2225,7 +2223,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &5723869491863422861
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2454,7 +2452,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!50 &6198976023959810968
 Rigidbody2D:
   serializedVersion: 5
@@ -2481,7 +2479,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &6201497950929728041
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2720,7 +2718,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &6866574075430742974
 GameObject:
   m_ObjectHideFlags: 0
@@ -3031,8 +3029,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.36463302, y: -0.1743899}
-  m_Radius: 0.66878283
+  m_Offset: {x: 0.57043517, y: 1.3617463}
+  m_Radius: 0.69264376
 --- !u!231 &7885621486740247545
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -3122,7 +3120,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &8115032923933836285
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3204,7 +3202,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &8150239131024065308
 GameObject:
   m_ObjectHideFlags: 0
@@ -3596,7 +3594,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
