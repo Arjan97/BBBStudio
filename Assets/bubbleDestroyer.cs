@@ -19,7 +19,7 @@ public class bubbleDestroyer : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         Destroy(bubble);
-        Debug.Log("Destroyed " + gameObject.name);
+        Debug.Log("Destroyed " + bubble.name);
 
     }
 }

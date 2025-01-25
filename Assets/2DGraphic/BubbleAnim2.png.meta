@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: eb3cf61447f8e154496ea58b6ff87476
+guid: c11c680ee25c6ae4b948ed43fb8cab5d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6208176927266180224
-    second: Play_0
-  - first:
-      213: 434674283716880328
-    second: Play_1
-  - first:
-      213: 6233243470654288490
-    second: Play_2
-  - first:
-      213: -902394926370334936
-    second: Play_3
+      213: 2092936599468792261
+    second: BubbleAnim2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -55,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -148,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Play_0
+      name: BubbleAnim2_0
       rect:
         serializedVersion: 2
-        x: 1217
-        y: 440
-        width: 70
-        height: 85
+        x: 659
+        y: 629
+        width: 192
+        height: 161
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,74 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 08c0a74e500e72650800000000000000
-      internalID: 6208176927266180224
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Play_1
-      rect:
-        serializedVersion: 2
-        x: 1289
-        y: 440
-        width: 46
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8c721f145f5480600800000000000000
-      internalID: 434674283716880328
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Play_2
-      rect:
-        serializedVersion: 2
-        x: 1335
-        y: 440
-        width: 74
-        height: 85
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a623fd259ede08650800000000000000
-      internalID: 6233243470654288490
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Play_3
-      rect:
-        serializedVersion: 2
-        x: 1398
-        y: 440
-        width: 75
-        height: 85
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 827d496789c0a73f0800000000000000
-      internalID: -902394926370334936
+      spriteID: 5c950c49fba9b0d10800000000000000
+      internalID: 2092936599468792261
       vertices: []
       indices: 
       edges: []
@@ -239,7 +164,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -249,10 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Play_0: 6208176927266180224
-      Play_1: 434674283716880328
-      Play_2: 6233243470654288490
-      Play_3: -902394926370334936
+      BubbleAnim2_0: 2092936599468792261
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

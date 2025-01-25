@@ -1,15 +1,32 @@
 using UnityEngine;
+using System.Collections;
 
 public class AnimationController : MonoBehaviour
 {
     private Animator animator;
+    private SpriteRenderer spriteRenderer;
 
     [Header("Animator Settings")]
     public bool isStatic = false;
     public bool isDead = false;
+
+    [Header("Hit Color Settings")]
+    public Color hitColor = Color.red;
+    public float colorTime = 0.5f;
+
+    private Color originalColor;
+    private AudioSource audioSource;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
+
+        if (spriteRenderer != null)
+        {
+            originalColor = spriteRenderer.color;
+        }
 
         if (animator != null)
         {
@@ -18,7 +35,7 @@ public class AnimationController : MonoBehaviour
 
         if (animator != null && isStatic)
         {
-            SetStatic(true);  
+            SetStatic(true);
         }
 
         if (animator != null && isDead)
@@ -26,13 +43,31 @@ public class AnimationController : MonoBehaviour
             SetStaticDeathTrigger();
         }
     }
+
     public void SetDeathTrigger()
     {
-        if (animator != null)
+        if (animator != null && spriteRenderer != null)
         {
             animator.SetTrigger("Death");
+            spriteRenderer.color = hitColor;
+            if (audioSource != null)
+            {
+                audioSource = GetComponent<AudioSource>();
+                audioSource.Play();
+            }
+            StartCoroutine(ResetColor(colorTime));
         }
     }
+
+    IEnumerator ResetColor(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = originalColor;
+        }
+    }
+
 
     public void SetStaticDeathTrigger()
     {
@@ -63,6 +98,16 @@ public class AnimationController : MonoBehaviour
         if (animator != null)
         {
             animator.SetBool("isStatic", value);
+        }
+    }
+
+    private System.Collections.IEnumerator FlashColor(Color flashColor, float duration)
+    {
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = flashColor;
+            yield return new WaitForSeconds(duration);
+            spriteRenderer.color = originalColor;
         }
     }
 }
