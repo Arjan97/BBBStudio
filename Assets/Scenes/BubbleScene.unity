@@ -2130,6 +2130,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8595684564498408893}
   - {fileID: 6467144908279170310}
   - {fileID: 4568136330560457467}
   - {fileID: 6245584879270145379}
@@ -3363,7 +3364,7 @@ Transform:
   m_LocalScale: {x: 0.13, y: 0.13, z: 0.13}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 5544070556611063333}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!231 &8595684564498408894
 SpringJoint2D:
@@ -3602,5 +3603,4 @@ SceneRoots:
   - {fileID: 517168171}
   - {fileID: 457481918}
   - {fileID: 2125746036}
-  - {fileID: 8595684564498408893}
   - {fileID: 5544070556611063333}
