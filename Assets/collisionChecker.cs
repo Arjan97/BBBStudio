@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class collisionChecker : MonoBehaviour
 {
@@ -13,19 +14,27 @@ public class collisionChecker : MonoBehaviour
         {
             HandlePlayerCollisionWithDelay(0.05f);
         }
-        else if (isCeiling && !collision.CompareTag("Bubble"))
+        else if (isCeiling && !isWall && !collision.CompareTag("Bubble") && !collision.CompareTag("BubblePoint") && !collision.CompareTag("SeaUrchin"))
         {
+            Debug.Log(collision.gameObject.name);
             KillPlayer();
-        } 
-       else if (collision.CompareTag("Bubble"))
-            {
-                Destroy(collision.gameObject, 0.2f);
-            }
+        }
+        else if (collision.CompareTag("Bubble"))
+        {
+            StartCoroutine(DestroyBubbleAfterDelay(collision.gameObject, 0.2f));
+        }
         else
         {
             Debug.Log("Collision with " + collision.gameObject.name);
         }
-        }
+    }
+
+    private IEnumerator DestroyBubbleAfterDelay(GameObject bubble, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(bubble);
+    }
+
     private void HandlePlayerCollisionWithDelay(float delay)
     {
         ComboManager comboManager = FindFirstObjectByType<ComboManager>();
@@ -53,7 +62,8 @@ public class collisionChecker : MonoBehaviour
             bubbleBar.TriggerGameOver();
         }
     }
-    private System.Collections.IEnumerator DestroyAfterDelay(float delay)
+
+    private IEnumerator DestroyAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);

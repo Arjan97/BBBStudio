@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      seaweeds1-1clean_0: -67115211205349908
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
