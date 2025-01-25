@@ -34,8 +34,11 @@ public class SoftBody : MonoBehaviour
     {
         for (int i = 0; i < points.Count; i++) 
         {
+            try 
+            {
+                skin.spline.SetPosition(i, points[i].localPosition);
+            } catch{}
             
-            skin.spline.SetPosition(i, points[i].localPosition);
 
             Vector2 radius = points[i].localPosition;
             Vector2 tangent = Vector2.Perpendicular(radius);
