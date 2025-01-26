@@ -781,6 +781,10 @@ PrefabInstance:
       propertyPath: animationController
       value: 
       objectReference: {fileID: 997776405}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215368818374047934, guid: 78ce3dfcdb08d9245a7c6729ad344ebe, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1007,7 +1011,7 @@ PrefabInstance:
       objectReference: {fileID: 771072753}
     - target: {fileID: 5282683202714234088, guid: b9c3ccf5bdb84034f9dbc7d58a264f8f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.32
+      value: -18.73
       objectReference: {fileID: 0}
     - target: {fileID: 5282683202714234088, guid: b9c3ccf5bdb84034f9dbc7d58a264f8f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1107,6 +1111,19 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bf8aeb4b1c52b34db8f5beac149ba8e, type: 3}
+      value: 0
+      value: 1
+      value: 0
+      value: 1
+      value: 0
+      value: 1
+      value: 47.200012
+      value: 106.400024
+      value: -654.8
+    - target: {fileID: 3894083848435272598, guid: f524d945b68529b4dadf75c3230a0730, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3.6599731
+      objectReference: {fileID: 0}
 --- !u!1001 &6386458532249404511
 PrefabInstance:
   m_ObjectHideFlags: 0
