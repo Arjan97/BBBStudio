@@ -8,36 +8,31 @@ public class ComboManager : MonoBehaviour
     public float comboDuration = 5f;
     public float timeLeft;
     public int multiplier = 1;
+    private int baseMultiplier = 2; 
+    private float lastMultiplierTime = 0f; 
+    private const float multiplierDelay = 2f;
 
     public Image timerCircle;
     public TMP_Text multiplierText;
     public TMP_Text scoreText;
 
     public float scaleSpeed = 10f;
-    public float scaleMultiplier = 1.2f;
+    public float scaleMultiplier = 1.1f;
 
-    private int currentScore;
     private Vector3 originalMultiplierScale;
-    private Vector3 originalTimerCircleScale;
     private Vector3 originalScoreScale;
     private Color originalScoreColor;
 
     private bool isComboActive = false;
     public Color activeColor = Color.green;
 
-
-
     private void Start()
     {
         timeLeft = 0;
-        multiplier = 1;
-        currentScore = 0;
+        multiplier = baseMultiplier;
 
         if (multiplierText != null)
             originalMultiplierScale = multiplierText.transform.localScale;
-
-        if (timerCircle != null)
-            originalTimerCircleScale = timerCircle.transform.localScale;
 
         if (scoreText != null)
         {
@@ -46,7 +41,6 @@ public class ComboManager : MonoBehaviour
         }
 
         UpdateMultiplierDisplay();
-        UpdateScoreDisplay();
         DisableComboUI();
     }
 
@@ -63,66 +57,68 @@ public class ComboManager : MonoBehaviour
             else if (timerCircle != null)
             {
                 timerCircle.fillAmount = timeLeft / comboDuration;
-                AnimateHasteEffect();
             }
         }
     }
 
-    public void AddScore(int baseScore)
+    public void AddBubbleScore(int baseScore)
     {
         int scoreToAdd = baseScore * multiplier;
-        currentScore += scoreToAdd;
-        UpdateScoreDisplay();
 
-        if (multiplierText != null)
-            StartCoroutine(BounceMultiplierText());
+        ScoreManager.Instance.AddScore(scoreToAdd);
+
         if (scoreText != null)
+            StartCoroutine(BounceAndChangeColor(scoreText));
+
+        if (!isComboActive)
         {
-            StartCoroutine(BounceAndChangeColor());
+            StartCombo();
         }
+    }
+
+    public bool CanIncrementMultiplier()
+    {
+        return Time.time - lastMultiplierTime >= multiplierDelay;
     }
 
     public void IncrementMultiplier()
     {
-        if (!isComboActive)
+        if (CanIncrementMultiplier())
         {
-            isComboActive = true;
+            multiplier++;
             timeLeft = comboDuration;
-            EnableComboUI();
+            UpdateMultiplierDisplay();
+            lastMultiplierTime = Time.time; 
+
+            if (multiplierText != null)
+                StartCoroutine(BounceMultiplierText());
         }
+    }
 
-        multiplier++;
+    private void StartCombo()
+    {
+        isComboActive = true;
+        multiplier = baseMultiplier; 
         timeLeft = comboDuration;
-
+        EnableComboUI();
         UpdateMultiplierDisplay();
-
-        if (multiplierText != null)
-            StartCoroutine(BounceMultiplierText());
+        lastMultiplierTime = Time.time; 
     }
 
     private void ResetCombo()
     {
         isComboActive = false;
-        multiplier = 1;
+        multiplier = baseMultiplier;
         timeLeft = 0;
 
         UpdateMultiplierDisplay();
         DisableComboUI();
-
-        if (timerCircle != null)
-            timerCircle.fillAmount = 0;
     }
 
     private void UpdateMultiplierDisplay()
     {
         if (multiplierText != null)
             multiplierText.text = "x" + multiplier;
-    }
-
-    private void UpdateScoreDisplay()
-    {
-        if (scoreText != null)
-            scoreText.text = currentScore.ToString();
     }
 
     private void EnableComboUI()
@@ -150,28 +146,14 @@ public class ComboManager : MonoBehaviour
         multiplierText.transform.localScale = originalMultiplierScale;
     }
 
-    private IEnumerator BounceAndChangeColor()
+    private IEnumerator BounceAndChangeColor(TMP_Text text)
     {
-        if (scoreText != null)
-        {
-            scoreText.color = activeColor;
-            scoreText.transform.localScale = originalScoreScale * scaleMultiplier;
+        text.color = activeColor;
+        text.transform.localScale = originalScoreScale * scaleMultiplier;
 
-            yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
 
-            scoreText.color = originalScoreColor;
-            scoreText.transform.localScale = originalScoreScale;
-        }
-    }
-
-    private void AnimateHasteEffect()
-    {
-        float scale = Mathf.Lerp(1f, scaleMultiplier, Mathf.PingPong(Time.time * scaleSpeed, 1f));
-
-        if (multiplierText != null)
-            multiplierText.transform.localScale = originalMultiplierScale * scale;
-
-        if (timerCircle != null)
-            timerCircle.transform.localScale = originalTimerCircleScale * scale;
+        text.color = originalScoreColor;
+        text.transform.localScale = originalScoreScale;
     }
 }

@@ -35,7 +35,6 @@ public class collisionChecker : MonoBehaviour
         yield return new WaitForSeconds(delay);
         Destroy(bubble);
         Debug.Log("Destroyed " + gameObject.name);
-
     }
 
     private void HandlePlayerCollisionWithDelay(float delay)
@@ -45,8 +44,12 @@ public class collisionChecker : MonoBehaviour
 
         if (comboManager != null)
         {
-            comboManager.AddScore(baseScore);
-            comboManager.IncrementMultiplier();
+            comboManager.AddBubbleScore(baseScore);
+
+            if (comboManager.CanIncrementMultiplier())
+            {
+                comboManager.IncrementMultiplier(); 
+            }
         }
 
         if (bubbleBar != null)

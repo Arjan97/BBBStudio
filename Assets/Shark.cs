@@ -5,12 +5,13 @@ public class Shark : MonoBehaviour
 {
     public float bubbleBarReduction = 20f;
     public float attackCooldown = 1.5f;
-    public float attackRange = 5f; // Customizable attack range
-    public bool smallShark = false; // Determines custom movement behavior
-    public float moveSpeed = 2f; // Horizontal movement speed
-    public float verticalAmplitude = 1f; // Vertical movement range
-    public float verticalFrequency = 1f; // Vertical movement speed
-    public float deleteThresholdX = -10f; // Distance after which shark is destroyed
+    public float detectionRange = 5f;
+    public float attackRange = 2f;
+    public bool smallShark = false;
+    public float moveSpeed = 2f;
+    public float verticalAmplitude = 1f;
+    public float verticalFrequency = 1f;
+    public float deleteThresholdX = -10f;
 
     private Animator animator;
     private bool canAttack = true;
@@ -48,9 +49,9 @@ public class Shark : MonoBehaviour
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
 
-        if (distanceToPlayer <= attackRange)
+        if (distanceToPlayer <= detectionRange && distanceToPlayer > attackRange)
         {
-            TriggerAttack(false);
+            TriggerAttack();
         }
     }
 
@@ -70,6 +71,8 @@ public class Shark : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            TriggerAttackImmediate();
+
             BubbleBar bubbleBar = FindFirstObjectByType<BubbleBar>();
             if (bubbleBar != null)
             {
@@ -83,19 +86,28 @@ public class Shark : MonoBehaviour
             {
                 animationController.SetDeathTrigger();
             }
-            TriggerAttack(true);
         }
     }
 
-    private void TriggerAttack(bool overrideCooldown)
+    private void TriggerAttack()
     {
-        if (animator != null && (canAttack || overrideCooldown))
+        if (animator != null && canAttack)
         {
-            if (!overrideCooldown)
+            StartCoroutine(AttackCooldown());
+            animator.SetTrigger("Attack");
+        }
+    }
+
+    private void TriggerAttackImmediate()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("Attack");
+
+            if (canAttack)
             {
                 StartCoroutine(AttackCooldown());
             }
-            animator.SetTrigger("AttackTrigger");
         }
     }
 
