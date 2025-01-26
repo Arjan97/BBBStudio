@@ -9,6 +9,7 @@ public class ScoreManager : MonoBehaviour
     private int currentScore;
 
     public float scoreIncreaseRate = 50f;
+    public float cleanScore = 10000; // sea should become clean when the score is >= cleanScore
 
     public delegate void ScoreUpdatedHandler(int newScore);
     public event ScoreUpdatedHandler OnScoreUpdated;
