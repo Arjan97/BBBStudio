@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2780676217542988956}
   - component: {fileID: 1735993755446216634}
   - component: {fileID: 3168783946720029162}
+  - component: {fileID: 8174848030451161149}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -225,8 +226,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 290804858208484157, guid: 97de1ae8ab17e1f4b960191377ad74a5, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 8ed286a753241c2499317ad98b6859cb, type: 3}
-  m_Resource: {fileID: 8300000, guid: 8ed286a753241c2499317ad98b6859cb, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5310301350c6cb6478bd638d3cf29ba0, type: 3}
+  m_Resource: {fileID: 8300000, guid: 5310301350c6cb6478bd638d3cf29ba0, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -312,6 +313,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!170 &8174848030451161149
+AudioDistortionFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82846863334384034}
+  m_Enabled: 1
+  m_DistortionLevel: 0.7
 --- !u!1 &646379829420391332
 GameObject:
   m_ObjectHideFlags: 0
@@ -3279,7 +3289,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.322
   m_Pitch: 1
   Loop: 0
   Mute: 0
