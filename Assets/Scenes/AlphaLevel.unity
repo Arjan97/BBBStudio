@@ -868,6 +868,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 967151887266032375, guid: 78ce3dfcdb08d9245a7c6729ad344ebe, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 967151887266032375, guid: 78ce3dfcdb08d9245a7c6729ad344ebe, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 967151887266032375, guid: 78ce3dfcdb08d9245a7c6729ad344ebe, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 1799789997051750722, guid: 78ce3dfcdb08d9245a7c6729ad344ebe, type: 3}
       propertyPath: m_Type
       value: 3
@@ -1098,7 +1110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8215368818374047934, guid: 78ce3dfcdb08d9245a7c6729ad344ebe, type: 3}
       propertyPath: m_MatchWidthOrHeight
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8412974154094322872, guid: 78ce3dfcdb08d9245a7c6729ad344ebe, type: 3}
       propertyPath: scoreText
@@ -1155,6 +1167,10 @@ PrefabInstance:
     - target: {fileID: 9060475986070021559, guid: 78ce3dfcdb08d9245a7c6729ad344ebe, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -77
+      objectReference: {fileID: 0}
+    - target: {fileID: 9184368104913511868, guid: 78ce3dfcdb08d9245a7c6729ad344ebe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8412974154094322872, guid: 78ce3dfcdb08d9245a7c6729ad344ebe, type: 3}
@@ -1276,7 +1292,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7116787970617233817, guid: b42d18b40d8131d4087d8554995479ec, type: 3}
       propertyPath: cleanScore
-      value: 10000
+      value: 30000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1446,7 +1462,7 @@ PrefabInstance:
       objectReference: {fileID: 508639206}
     - target: {fileID: 4952719203272017967, guid: b9c3ccf5bdb84034f9dbc7d58a264f8f, type: 3}
       propertyPath: resetDistance
-      value: 23.5
+      value: 23.4
       objectReference: {fileID: 0}
     - target: {fileID: 4952719203272017967, guid: b9c3ccf5bdb84034f9dbc7d58a264f8f, type: 3}
       propertyPath: backgroundPrefab
@@ -1454,7 +1470,7 @@ PrefabInstance:
       objectReference: {fileID: 771072753}
     - target: {fileID: 5282683202714234088, guid: b9c3ccf5bdb84034f9dbc7d58a264f8f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.73
+      value: -21.1
       objectReference: {fileID: 0}
     - target: {fileID: 5282683202714234088, guid: b9c3ccf5bdb84034f9dbc7d58a264f8f, type: 3}
       propertyPath: m_LocalPosition.y
