@@ -127,7 +127,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubbleBarReduction: 20
-  attackCooldown: 2
+  attackCooldown: 0.75
+  detectionRange: 4
+  attackRange: 3
 --- !u!58 &8001463331750936830
 CircleCollider2D:
   m_ObjectHideFlags: 0
