@@ -375,10 +375,7 @@ MonoBehaviour:
   bubbleBonusScore: 500
   animationController: {fileID: 0}
   se:
-  - {fileID: 8300000, guid: 584ffb6ac50b0e14ba2fe3506addc6ff, type: 3}
-  - {fileID: 8300000, guid: 5310301350c6cb6478bd638d3cf29ba0, type: 3}
   - {fileID: 8300000, guid: ae347766e66ff104f937ca647cd069dd, type: 3}
-  - {fileID: 8300000, guid: 8ed286a753241c2499317ad98b6859cb, type: 3}
   hitColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &2665991594324383710
 MonoBehaviour:
