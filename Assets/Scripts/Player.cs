@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -42,24 +43,46 @@ public class Player : MonoBehaviour
         }
         // deflateCoroutine = StartCoroutine(ChangeBubbleSize(deflateVal, deflateInterval));
     }
+    private void OnEnable()
+    {
+        // Enable input only in gameplay scenes
+        string currentScene = SceneManager.GetActiveScene().name;
+        if (currentScene != "StartScreen" && currentScene != "GameOver")
+        {
+            input.Player.Enable();
+        }
+    }
+
+    private void OnDisable()
+    {
+        input.Player.Disable();
+    }
 
     void FixedUpdate()
     {
+        if (SceneManager.GetActiveScene().name == "StartScreen" || SceneManager.GetActiveScene().name == "GameOver")
+            return;
+
         bubbleRb.AddForce(new Vector2(0f, upForce));
 
-        if (windMagnitude > 0) {
+        if (windMagnitude > 0)
+        {
             float force = -transform.localPosition.x * windMagnitude;
             pushBubble(new Vector2(force, 0f));
         }
-        // character.rotation = Quaternion.identity;
     }
 
-    void Update() {
+    void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "StartScreen" || SceneManager.GetActiveScene().name == "GameOver")
+            return;
 
-        // input section
-        if (!input.Player.Dive.WasPressedThisFrame()) {
+        // Input section
+        if (!input.Player.Dive.WasPressedThisFrame())
+        {
             return;
         }
+
         // Start the coroutine to change gravity
         if (gravityCoroutine != null)
         {
@@ -67,7 +90,7 @@ public class Player : MonoBehaviour
         }
         gravityCoroutine = StartCoroutine(ChangeGravityForOneSecond());
         character.GetComponent<Animator>().SetTrigger("Drop");
-        
+
         pushBubble(new Vector2(0f, -tapForce));
         charRb.AddForce(new Vector2(0f, -tapImpulse), ForceMode2D.Impulse);
 
