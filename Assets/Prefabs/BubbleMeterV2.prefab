@@ -507,6 +507,10 @@ PrefabInstance:
       propertyPath: multiplierText
       value: 
       objectReference: {fileID: 3599211977855904549}
+    - target: {fileID: 2805968165268896404, guid: f524d945b68529b4dadf75c3230a0730, type: 3}
+      propertyPath: Priority
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 3428247376156035202, guid: f524d945b68529b4dadf75c3230a0730, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
