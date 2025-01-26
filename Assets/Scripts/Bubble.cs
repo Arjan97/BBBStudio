@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Bubble : MonoBehaviour
 {
+    public GameObject Highlight;
+    public GameObject Skin;
+    public GameObject PopAnimation;
 
     private List<Rigidbody2D> vertices;
 
@@ -32,5 +35,12 @@ public class Bubble : MonoBehaviour
         {
             Debug.LogError("No Rigidbody2D components found for bubble movement.");
         }
+    }
+
+    public void popBubble() {
+        
+        Highlight.SetActive(false);
+        Skin.SetActive(false);
+        PopAnimation.SetActive(true);
     }
 }

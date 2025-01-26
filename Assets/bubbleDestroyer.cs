@@ -17,7 +17,10 @@ public class bubbleDestroyer : MonoBehaviour
     }
     private IEnumerator DestroyBubbleAfterDelay(GameObject bubble, float delay)
     {
+        
         yield return new WaitForSeconds(delay);
+        bubble.GetComponent<Bubble>().popBubble();
+        yield return new WaitForSeconds(0.5f);
         Destroy(bubble);
         Debug.Log("Destroyed " + bubble.name);
 

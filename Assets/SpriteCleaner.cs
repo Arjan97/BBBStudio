@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class SpriteCleaner : MonoBehaviour
 {
-    public float cleanScore = 5000f;
     float cleanliness = 0.0f; // from 0.0 to 1.0
     SpriteRenderer pollutetSprite;
     SpriteRenderer cleanSprite;
@@ -16,7 +15,7 @@ public class SpriteCleaner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cleanliness = ScoreManager.Instance.GetScore() / cleanScore;
+        cleanliness = ScoreManager.Instance.GetScore() / ScoreManager.Instance.cleanScore;
         if (cleanliness > 1.0f) {
             cleanliness = 1.0f;
         }
