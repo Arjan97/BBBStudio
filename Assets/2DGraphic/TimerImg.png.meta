@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: eb21a6f26a1d4534c83e8ff4ccd329c8
+guid: c4edc3af5eccbec4e8929fe12e5b8c6d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8035568492220323646
-    second: Shark1-2_0
+      213: 340399603409605090
+    second: UI-handle_0
   - first:
-      213: -3390137672615303120
-    second: Shark1-2_1
+      213: -6335589027977246914
+    second: UI-handle_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -55,7 +55,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 153, y: 406, z: 1657, w: 559}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -142,45 +142,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Shark1-2_0
+      name: UI-handle_0
       rect:
         serializedVersion: 2
-        x: 455
-        y: 370
-        width: 927
-        height: 466
+        x: 153
+        y: 408
+        width: 114
+        height: 108
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2c8e2e4d70deb7090800000000000000
-      internalID: -8035568492220323646
+      spriteID: 2e1d9e2c2a759b400800000000000000
+      internalID: 340399603409605090
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shark1-2_1
+      name: UI-handle_1
       rect:
         serializedVersion: 2
-        x: 837
-        y: 355
-        width: 68
-        height: 7
+        x: 135
+        y: 387
+        width: 146
+        height: 139
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 038681c9fbfc3f0d0800000000000000
-      internalID: -3390137672615303120
+      spriteID: e37cd80b8577318a0800000000000000
+      internalID: -6335589027977246914
       vertices: []
       indices: 
       edges: []
@@ -189,8 +189,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
-    internalID: 0
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -199,8 +199,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Shark1-2_0: -8035568492220323646
-      Shark1-2_1: -3390137672615303120
+      UI-handle_0: 340399603409605090
+      UI-handle_1: -6335589027977246914
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
