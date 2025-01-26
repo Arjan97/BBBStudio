@@ -4,17 +4,24 @@ using System.Collections;
 public class Shark : MonoBehaviour
 {
     public float bubbleBarReduction = 20f;
-    public float attackCooldown = 1f;
-    public float attackRange = 3f; 
+    public float attackCooldown = 1.5f;
+    public float attackRange = 5f; // Customizable attack range
+    public bool smallShark = false; // Determines custom movement behavior
+    public float moveSpeed = 2f; // Horizontal movement speed
+    public float verticalAmplitude = 1f; // Vertical movement range
+    public float verticalFrequency = 1f; // Vertical movement speed
+    public float deleteThresholdX = -10f; // Distance after which shark is destroyed
 
     private Animator animator;
     private bool canAttack = true;
     private GameObject player;
+    private float initialY;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
+        initialY = transform.position.y;
 
         if (animator == null)
         {
@@ -28,14 +35,34 @@ public class Shark : MonoBehaviour
 
     private void Update()
     {
-        if (player == null || !canAttack)
+        if (player == null)
+            return;
+
+        if (smallShark)
+        {
+            CustomMovement();
+        }
+
+        if (!canAttack)
             return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
 
         if (distanceToPlayer <= attackRange)
         {
-            TriggerAttack();
+            TriggerAttack(false);
+        }
+    }
+
+    private void CustomMovement()
+    {
+        transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+        float newY = initialY + Mathf.Sin(Time.time * verticalFrequency) * verticalAmplitude;
+        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+
+        if (transform.position.x <= deleteThresholdX)
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -56,16 +83,19 @@ public class Shark : MonoBehaviour
             {
                 animationController.SetDeathTrigger();
             }
-            TriggerAttack();
+            TriggerAttack(true);
         }
     }
 
-    private void TriggerAttack()
+    private void TriggerAttack(bool overrideCooldown)
     {
-        if (animator != null && canAttack)
+        if (animator != null && (canAttack || overrideCooldown))
         {
-            StartCoroutine(AttackCooldown());
-            animator.SetTrigger("Attack");
+            if (!overrideCooldown)
+            {
+                StartCoroutine(AttackCooldown());
+            }
+            animator.SetTrigger("AttackTrigger");
         }
     }
 

@@ -977,6 +977,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dad2a286a4601404888bd9507063f204, type: 3}
+--- !u!1001 &2141826688003125229
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1057324003739961195, guid: 357c439b23ce63f4cb0300071750f8b4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1057324003739961195, guid: 357c439b23ce63f4cb0300071750f8b4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1057324003739961195, guid: 357c439b23ce63f4cb0300071750f8b4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1057324003739961195, guid: 357c439b23ce63f4cb0300071750f8b4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1057324003739961195, guid: 357c439b23ce63f4cb0300071750f8b4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1057324003739961195, guid: 357c439b23ce63f4cb0300071750f8b4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1057324003739961195, guid: 357c439b23ce63f4cb0300071750f8b4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1057324003739961195, guid: 357c439b23ce63f4cb0300071750f8b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1057324003739961195, guid: 357c439b23ce63f4cb0300071750f8b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1057324003739961195, guid: 357c439b23ce63f4cb0300071750f8b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1352900934365278410, guid: 357c439b23ce63f4cb0300071750f8b4, type: 3}
+      propertyPath: m_Name
+      value: SmallSharkSpawner
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 357c439b23ce63f4cb0300071750f8b4, type: 3}
 --- !u!1001 &2195725887227524582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1424,6 +1481,7 @@ SceneRoots:
   - {fileID: 283493609}
   - {fileID: 1974269578}
   - {fileID: 4660690563484639260}
+  - {fileID: 2141826688003125229}
   - {fileID: 8289667878806103528}
   - {fileID: 2131386630}
   - {fileID: 8823659715702495748}
