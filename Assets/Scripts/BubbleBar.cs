@@ -12,18 +12,24 @@ public class BubbleBar : MonoBehaviour
     public Slider bubbleSlider;
 
     public TMP_Text scoreText;
+    public TMP_Text comboText; 
     public float scoreIncreaseRate = 50f;
     public int bubbleBonusScore = 200;
     private Vector3 originalScoreTextScale;
+    private Vector3 originalComboTextScale;
     private float displayedScore = 0;
 
     public AnimationController animationController;
 
     public AudioClip[] se;
     private AudioSource audio;
-    private Image bubbleBarFillImage; 
+    private Image bubbleBarFillImage;
     public Color hitColor = Color.red;
     private Color originalColor;
+
+    public float scoreScaleIncr = 1.1f;
+    public float comboBounceScaleIncr = 1.2f; 
+    public float bounceDuration = 0.1f; 
 
     private void Start()
     {
@@ -45,6 +51,11 @@ public class BubbleBar : MonoBehaviour
         {
             originalScoreTextScale = scoreText.transform.localScale;
             scoreText.text = ScoreManager.Instance.GetScore().ToString();
+        }
+
+        if (comboText != null)
+        {
+            originalComboTextScale = comboText.transform.localScale;
         }
     }
 
@@ -101,15 +112,44 @@ public class BubbleBar : MonoBehaviour
         if (scoreText != null)
         {
             scoreText.text = ScoreManager.Instance.GetScore().ToString();
-            StartCoroutine(BounceScoreText());
+            StartCoroutine(BounceScoreText(scoreText, originalScoreTextScale, scoreScaleIncr));
         }
     }
 
-    private IEnumerator BounceScoreText()
+    public void TriggerComboBounce()
     {
-        scoreText.transform.localScale = originalScoreTextScale * 1.5f;
-        yield return new WaitForSeconds(0.1f);
-        scoreText.transform.localScale = originalScoreTextScale;
+        if (comboText != null)
+        {
+            StartCoroutine(BounceScoreText(comboText, originalComboTextScale, comboBounceScaleIncr));
+        }
+    }
+
+    private IEnumerator BounceScoreText(TMP_Text text, Vector3 originalScale, float scaleIncr)
+    {
+        Vector3 targetScale = originalScale * scaleIncr;
+        float elapsed = 0f;
+
+        // Scale up
+        while (elapsed < bounceDuration)
+        {
+            elapsed += Time.deltaTime;
+            float progress = elapsed / bounceDuration;
+            text.transform.localScale = Vector3.Lerp(originalScale, targetScale, progress);
+            yield return null;
+        }
+
+        elapsed = 0f;
+
+        // Scale back down
+        while (elapsed < bounceDuration)
+        {
+            elapsed += Time.deltaTime;
+            float progress = elapsed / bounceDuration;
+            text.transform.localScale = Vector3.Lerp(targetScale, originalScale, progress);
+            yield return null;
+        }
+
+        text.transform.localScale = originalScale;
     }
 
     private IEnumerator DelaySceneLoad(float delay)

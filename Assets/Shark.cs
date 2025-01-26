@@ -4,17 +4,25 @@ using System.Collections;
 public class Shark : MonoBehaviour
 {
     public float bubbleBarReduction = 20f;
-    public float attackCooldown = 1f;
-    public float attackRange = 3f; 
+    public float attackCooldown = 1.5f;
+    public float detectionRange = 5f;
+    public float attackRange = 2f;
+    public bool smallShark = false;
+    public float moveSpeed = 2f;
+    public float verticalAmplitude = 1f;
+    public float verticalFrequency = 1f;
+    public float deleteThresholdX = -10f;
 
     private Animator animator;
     private bool canAttack = true;
     private GameObject player;
+    private float initialY;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
+        initialY = transform.position.y;
 
         if (animator == null)
         {
@@ -28,14 +36,34 @@ public class Shark : MonoBehaviour
 
     private void Update()
     {
-        if (player == null || !canAttack)
+        if (player == null)
+            return;
+
+        if (smallShark)
+        {
+            CustomMovement();
+        }
+
+        if (!canAttack)
             return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
 
-        if (distanceToPlayer <= attackRange)
+        if (distanceToPlayer <= detectionRange && distanceToPlayer > attackRange)
         {
             TriggerAttack();
+        }
+    }
+
+    private void CustomMovement()
+    {
+        transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+        float newY = initialY + Mathf.Sin(Time.time * verticalFrequency) * verticalAmplitude;
+        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+
+        if (transform.position.x <= deleteThresholdX)
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -43,6 +71,8 @@ public class Shark : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            TriggerAttackImmediate();
+
             BubbleBar bubbleBar = FindFirstObjectByType<BubbleBar>();
             if (bubbleBar != null)
             {
@@ -56,7 +86,6 @@ public class Shark : MonoBehaviour
             {
                 animationController.SetDeathTrigger();
             }
-            TriggerAttack();
         }
     }
 
@@ -66,6 +95,19 @@ public class Shark : MonoBehaviour
         {
             StartCoroutine(AttackCooldown());
             animator.SetTrigger("Attack");
+        }
+    }
+
+    private void TriggerAttackImmediate()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("Attack");
+
+            if (canAttack)
+            {
+                StartCoroutine(AttackCooldown());
+            }
         }
     }
 

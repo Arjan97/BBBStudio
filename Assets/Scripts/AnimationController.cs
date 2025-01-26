@@ -100,14 +100,4 @@ public class AnimationController : MonoBehaviour
             animator.SetBool("isStatic", value);
         }
     }
-
-    private System.Collections.IEnumerator FlashColor(Color flashColor, float duration)
-    {
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.color = flashColor;
-            yield return new WaitForSeconds(duration);
-            spriteRenderer.color = originalColor;
-        }
-    }
 }
