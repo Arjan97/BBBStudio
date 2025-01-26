@@ -15,7 +15,6 @@ public class SpriteCleaner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("ScoreManager.Instance.GetScore():" + ScoreManager.Instance.GetScore() + "; ScoreManager.Instance.cleanScore:" + ScoreManager.Instance.cleanScore);
         cleanliness = ScoreManager.Instance.GetScore() / ScoreManager.Instance.cleanScore;
         if (cleanliness > 1.0f) {
             cleanliness = 1.0f;
