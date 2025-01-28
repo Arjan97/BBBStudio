@@ -4,33 +4,22 @@ using System.Collections;
 public class AnimationController : MonoBehaviour
 {
     private Animator animator;
-    private SpriteRenderer spriteRenderer;
+    private AudioSource audioSource;
 
     [Header("Animator Settings")]
     public bool isStatic = false;
     public bool isDead = false;
-
-    [Header("Hit Color Settings")]
-    public Color hitColor = Color.red;
-    public float colorTime = 0.5f;
-
-    private Color originalColor;
-    private AudioSource audioSource;
+    public bool isHit = false;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
-
-        if (spriteRenderer != null)
-        {
-            originalColor = spriteRenderer.color;
-        }
 
         if (animator != null)
         {
             animator.SetBool("isStatic", isStatic);
+            animator.SetBool("isHit", isHit);
         }
 
         if (animator != null && isStatic)
@@ -40,40 +29,39 @@ public class AnimationController : MonoBehaviour
 
         if (animator != null && isDead)
         {
-            SetStaticDeathTrigger();
+            SetIsDead(true);
         }
     }
 
-    public void SetDeathTrigger()
-    {
-        if (animator != null && spriteRenderer != null)
-        {
-            animator.SetTrigger("Death");
-            spriteRenderer.color = hitColor;
-            if (audioSource != null)
-            {
-                audioSource = GetComponent<AudioSource>();
-                audioSource.Play();
-            }
-            StartCoroutine(ResetColor(colorTime));
-        }
-    }
-
-    IEnumerator ResetColor(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.color = originalColor;
-        }
-    }
-
-
-    public void SetStaticDeathTrigger()
+    public void SetIsHit(bool value)
     {
         if (animator != null)
         {
-            animator.SetTrigger("staticDeath");
+            isHit = value;
+            animator.SetBool("isHit", isHit);
+        }
+
+        if (value && audioSource != null)
+        {
+            audioSource.Play();
+        }
+    }
+
+    public void SetIsDead(bool value)
+    {
+        if (animator != null)
+        {
+            isDead = value;
+            animator.SetTrigger("Death");
+        }
+    }
+
+    public void SetStatic(bool value)
+    {
+        if (animator != null)
+        {
+            isStatic = value;
+            animator.SetBool("isStatic", isStatic);
         }
     }
 
@@ -90,14 +78,6 @@ public class AnimationController : MonoBehaviour
         if (animator != null)
         {
             animator.SetTrigger("fliesAway");
-        }
-    }
-
-    public void SetStatic(bool value)
-    {
-        if (animator != null)
-        {
-            animator.SetBool("isStatic", value);
         }
     }
 }

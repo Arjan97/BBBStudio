@@ -45,18 +45,18 @@ public class SeaDevil : MonoBehaviour
     {
         if (collision.CompareTag("Player") && canAttack)
         {
-            BubbleBar bubbleBar = FindFirstObjectByType<BubbleBar>();
-            if (bubbleBar != null)
+            PlayerController playerController = collision.GetComponent<PlayerController>();
+            if (playerController != null && playerController.CanTakeHit())
             {
-                bubbleBar.currentValue -= bubbleBarReduction;
-                bubbleBar.currentValue = Mathf.Max(bubbleBar.currentValue, 0);
-                bubbleBar.FlashBubbleBarColor();
-            }
+                BubbleBar bubbleBar = FindFirstObjectByType<BubbleBar>();
+                if (bubbleBar != null)
+                {
+                    bubbleBar.currentValue -= bubbleBarReduction;
+                    bubbleBar.currentValue = Mathf.Max(bubbleBar.currentValue, 0);
+                    bubbleBar.FlashBubbleBarColor();
+                }
 
-            AnimationController animationController = collision.GetComponent<AnimationController>();
-            if (animationController != null)
-            {
-                animationController.SetDeathTrigger();
+                    playerController.RegisterHit();
             }
         }
     }

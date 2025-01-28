@@ -19,8 +19,7 @@ public class BubbleBar : MonoBehaviour
     private Vector3 originalComboTextScale;
     private float displayedScore = 0;
 
-    public AnimationController animationController;
-
+    private PlayerController playerController;
     public AudioClip[] se;
     private AudioSource audio;
     private Image bubbleBarFillImage;
@@ -35,6 +34,7 @@ public class BubbleBar : MonoBehaviour
     {
         audio = GetComponent<AudioSource>();
         currentValue = maxValue;
+        playerController = FindObjectOfType<PlayerController>();
 
         if (bubbleSlider != null)
         {
@@ -162,9 +162,9 @@ public class BubbleBar : MonoBehaviour
 
     public void TriggerGameOver()
     {
-        if (animationController != null)
+        if (playerController != null)
         {
-            animationController.SetDeathTrigger();
+            playerController.TriggerDeath();
         }
 
         if (audio != null && se.Length > 3)
