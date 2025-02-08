@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem.Utilities;
 
 public class collisionChecker : MonoBehaviour
 {
@@ -7,6 +8,13 @@ public class collisionChecker : MonoBehaviour
     public float valueToAdd = 10f;
     public bool isCeiling = false;
     public bool isWall = false;
+ 
+    private PlayerController playerC;
+
+    private void Awake()
+    {
+        playerC = FindFirstObjectByType<PlayerController>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -55,6 +63,11 @@ public class collisionChecker : MonoBehaviour
         if (bubbleBar != null)
         {
             bubbleBar.AddValue(valueToAdd);
+        }
+
+        if (playerC != null)
+        {
+            playerC.PushPlayer(10);
         }
 
         StartCoroutine(DestroyAfterDelay(delay));

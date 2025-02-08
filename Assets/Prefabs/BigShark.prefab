@@ -105,7 +105,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubbleBarReduction: 40
   attackCooldown: 1
+  detectionRange: 5
   attackRange: 6
+  smallShark: 0
+  moveSpeed: 3
+  verticalAmplitude: 1
+  verticalFrequency: 1
+  deleteThresholdX: -10
 --- !u!95 &7826478424948586204
 Animator:
   serializedVersion: 7
@@ -186,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a5640fa72e45344ab24cf442c661ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 2.5
   deleteThresholdX: -10
   isBubble: 0
   tapForce: 10
