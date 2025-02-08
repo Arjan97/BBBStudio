@@ -8,7 +8,6 @@ public class collisionChecker : MonoBehaviour
     public float valueToAdd = 10f;
     public bool isCeiling = false;
     public bool isWall = false;
- 
     private PlayerController playerC;
 
     private void Awake()
@@ -20,7 +19,7 @@ public class collisionChecker : MonoBehaviour
     {
         if (!isCeiling && !isWall)
         {
-            HandlePlayerCollisionWithDelay(0.05f);
+            HandlePlayerCollisionWithDelay(0f);
         }
         else if (isCeiling && !isWall && !collision.CompareTag("Bubble") && !collision.CompareTag("BubblePoint") && !collision.CompareTag("SeaUrchin"))
         {
@@ -40,6 +39,7 @@ public class collisionChecker : MonoBehaviour
 
     private IEnumerator DestroyBubbleAfterDelay(GameObject bubble, float delay)
     {
+        bubble.GetComponent<Collider2D>().enabled = false;
         yield return new WaitForSeconds(delay);
         Destroy(bubble);
         Debug.Log("Destroyed " + gameObject.name);
@@ -49,6 +49,9 @@ public class collisionChecker : MonoBehaviour
     {
         ComboManager comboManager = FindFirstObjectByType<ComboManager>();
         BubbleBar bubbleBar = FindFirstObjectByType<BubbleBar>();
+
+        int currentMultiplier = comboManager != null ? comboManager.multiplier : 1;
+        float adjustedValueToAdd = valueToAdd * currentMultiplier; 
 
         if (comboManager != null)
         {
@@ -62,7 +65,7 @@ public class collisionChecker : MonoBehaviour
 
         if (bubbleBar != null)
         {
-            bubbleBar.AddValue(valueToAdd);
+            bubbleBar.AddValue(adjustedValueToAdd);
         }
 
         if (playerC != null)
