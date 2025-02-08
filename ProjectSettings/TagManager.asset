@@ -8,6 +8,7 @@ TagManager:
   - BubblePoint
   - PlayerCol
   - SeaUrchin
+  - Shark
   layers:
   - Default
   - TransparentFX

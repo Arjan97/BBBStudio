@@ -47,6 +47,15 @@ public class Spawner : MonoBehaviour
         float y = isBuilding ? buildingY : Random.Range(minY, maxY);
 
         Vector3 spawnPosition = new Vector3(Camera.main.transform.position.x + spawnXOffset, y, 0);
+
+        if (rndObj.CompareTag("Shark")) 
+        {
+            WarningManager warningManager = FindFirstObjectByType<WarningManager>();
+            if (warningManager != null)
+            {
+                warningManager.ShowWarning(spawnPosition);
+            }
+        }
         Instantiate(rndObj, spawnPosition, Quaternion.identity);
     }
 }
