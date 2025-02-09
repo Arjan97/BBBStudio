@@ -108,7 +108,7 @@ MonoBehaviour:
   detectionRange: 5
   attackRange: 6
   smallShark: 0
-  moveSpeed: 3
+  moveSpeed: 3.5
   verticalAmplitude: 1
   verticalFrequency: 1
   deleteThresholdX: -10

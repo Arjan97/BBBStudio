@@ -70,7 +70,7 @@ public class collisionChecker : MonoBehaviour
 
         if (playerC != null)
         {
-            playerC.PushPlayer(5);
+            playerC.PushPlayer(7);
         }
 
         StartCoroutine(DestroyAfterDelay(delay));

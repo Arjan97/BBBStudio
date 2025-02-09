@@ -1319,6 +1319,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4510989936152636976, guid: 62ef86a078537084f8396eaaae43b2c4, type: 3}
+      propertyPath: warningDuration
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8014987875701731433, guid: 62ef86a078537084f8396eaaae43b2c4, type: 3}
       propertyPath: m_Name
       value: WarningManager
@@ -1556,7 +1560,7 @@ PrefabInstance:
       objectReference: {fileID: 508639206}
     - target: {fileID: 4952719203272017967, guid: b9c3ccf5bdb84034f9dbc7d58a264f8f, type: 3}
       propertyPath: resetDistance
-      value: 23.78
+      value: 23.79
       objectReference: {fileID: 0}
     - target: {fileID: 4952719203272017967, guid: b9c3ccf5bdb84034f9dbc7d58a264f8f, type: 3}
       propertyPath: backgroundPrefab
@@ -1981,6 +1985,10 @@ PrefabInstance:
     - target: {fileID: 3922647586868874069, guid: 1dc90037d780da149a1550a62885f986, type: 3}
       propertyPath: m_Name
       value: CheatManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922647586868874069, guid: 1dc90037d780da149a1550a62885f986, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
