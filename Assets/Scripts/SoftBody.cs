@@ -4,7 +4,6 @@ using UnityEngine.U2D;
 
 public class SoftBody : MonoBehaviour
 {
-    // public Transform[] points;
     public SpriteShapeController skin;
 
     public float wobbleStrength = 0.1f;
