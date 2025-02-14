@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 9e20318064194744c96b66faa76595d3
+guid: 1bd1db592f724914f8affff50e6b19dd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1844505770764501603
-    second: HighLight-bubble_0
-  - first:
-      213: -3463726097923113922
-    second: HighLight-bubble_1
+      213: 3778379979294506438
+    second: bubblematerial (1)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,14 +46,14 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
-  alignment: 9
-  spritePivot: {x: 0.69018, y: 0.32634085}
-  spritePixelsToUnits: 100
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 350
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -100,7 +97,33 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -116,67 +139,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HighLight-bubble_0
+      name: bubblematerial (1)_0
       rect:
         serializedVersion: 2
-        x: 919
-        y: 340
-        width: 79
-        height: 85
+        x: 13
+        y: 11
+        width: 374
+        height: 362
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d9d7c6b26cff666e0800000000000000
-      internalID: -1844505770764501603
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HighLight-bubble_1
-      rect:
-        serializedVersion: 2
-        x: 1042
-        y: 304
-        width: 318
-        height: 324
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e3cfa0e277f5eefc0800000000000000
-      internalID: -3463726097923113922
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HighLight-bubble_2
-      rect:
-        serializedVersion: 2
-        x: 767
-        y: 226
-        width: 694
-        height: 463
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7e12c71a19d7a214784641b42eb36135
-      internalID: -441588349
+      spriteID: 6cdfb4c82908f6430800000000000000
+      internalID: 3778379979294506438
       vertices: []
       indices: 
       edges: []
@@ -185,8 +164,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 134c49f347459be4da1e267b62c9715d
-    internalID: -513239842
+    spriteID: 
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -195,9 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      HighLight-bubble_0: -1844505770764501603
-      HighLight-bubble_1: -3463726097923113922
-      HighLight-bubble_2: -441588349
+      bubblematerial (1)_0: 3778379979294506438
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
