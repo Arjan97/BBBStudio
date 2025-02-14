@@ -29,7 +29,7 @@ public class DifficultyCurveModfier : MonoBehaviour
             {
                 bubbleSpawner.maxSpawnInterval /= bubbleCurve.Evaluate(currentCurvePoint);
                 foreach(Spawner enemySpawner in enemySpawners)
-                    enemySpawner.maxSpawnInterval /= difficultyCurve.Evaluate(currentCurvePoint);
+                enemySpawner.maxSpawnInterval /= difficultyCurve.Evaluate(currentCurvePoint);
                 currentCurvePoint++;
             }
         }
