@@ -578,11 +578,11 @@ GameObject:
   - component: {fileID: 741546702}
   - component: {fileID: 741546701}
   - component: {fileID: 741546700}
+  - component: {fileID: 741546695}
   - component: {fileID: 741546699}
   - component: {fileID: 741546698}
   - component: {fileID: 741546697}
   - component: {fileID: 741546696}
-  - component: {fileID: 741546695}
   - component: {fileID: 741546694}
   - component: {fileID: 741546693}
   m_Layer: 0
@@ -731,7 +731,7 @@ SpringJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
-  m_Distance: 0.1
+  m_Distance: 0.005
   m_DampingRatio: 1
   m_Frequency: 2
 --- !u!58 &741546697
@@ -979,9 +979,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2b821b2e5ab1f4f8fe1cc0c2f09bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tapForce: 2
-  tapImpulse: 2
-  upForce: 5
+  tapBubbleForce: 0
+  tapBirdImpulse: 2
+  buoyancyMultiplier: 10
   windMagnitude: 1
   character: {fileID: 741546692}
   se:
@@ -2631,19 +2631,18 @@ MonoBehaviour:
   highlight: {fileID: 8109042956425545535}
   radius: 0.6
   segmentCount: 22
-  vertexRadius: 0.03
-  vertexMass: 0.1
+  vertexRadius: 0.05
+  vertexMass: 0.08
   centerSpringFrequency: 3
   neighborSpringFrequency: 4
   centerSpringDamping: 0.5
   neighborSpringDamping: 1
-  mergeDelay: 0.1
-  unscrambleDelay: 0.3
+  unscrambleDelay: 0.5
   scrambleDotThreshold: -0.5
-  isWobble: 0
-  wobbleDelta: 0.3
-  wobbleStrength: 0.001
-  isWobbleImpulse: 0
+  isWobble: 1
+  wobbleAmplitude: 0.02
+  wobbleFrequency: 2
+  wobbleSpeed: 5
   isDeflating: 1
   deflateSpeed: 0.03
   minRadius: 0.4
@@ -2651,6 +2650,7 @@ MonoBehaviour:
   maxVertexCount: 30
   pruneMinDelay: 0.1
   center: {fileID: 0}
+  wobbleTimer: 0
 --- !u!114 &7737070714875758685
 MonoBehaviour:
   m_ObjectHideFlags: 0

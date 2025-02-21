@@ -18,14 +18,15 @@ public class AutoBubble : MonoBehaviour
     public float neighborSpringFrequency = 3f;
     public float centerSpringDamping = 0f;
     public float neighborSpringDamping = 1f;
-    public float mergeDelay = 0.3f;
     public float unscrambleDelay = 0.3f;
     public float scrambleDotThreshold = 0.5f;
 
     public bool isWobble = false;
-    public float wobbleDelta = 0.2f; // e.g. 0.1 means +/-0.1 * radius
-    public float wobbleStrength = 0.1f;
-    public bool isWobbleImpulse = false;
+    public float wobbleAmplitude = 0.02f;
+    public float wobbleFrequency = 2f;
+    public float wobbleSpeed = 5f;
+    // public float wobbleStrength = 0.1f;
+    // public bool isWobbleImpulse = false;
 
     public bool isDeflating = false;
     public float deflateSpeed = 0.1f;
@@ -41,17 +42,17 @@ public class AutoBubble : MonoBehaviour
     
     float initialRadius;
     Vector3 initialHighlightScale;
-    bool needSkinReset = false;
+    bool isVertexRescanNeeded = true;
     bool isUnscrambling = false;
     float pruneTimer = 0f;
-    const float s_DistanceTolerance = 0.001f;
+    const float s_DistanceTolerance = 0.01f;//0.001f;
+    public float wobbleTimer = 0f;
 
     void Awake()
     {
         vertices = new List<Transform>();
         initialRadius = radius;
         GenerateBubble();
-        ResetSkin();
     }
 
     // Update is called once per frame
@@ -147,24 +148,22 @@ public class AutoBubble : MonoBehaviour
         ReJoint(b.nextVertex, a.prevVertex);
         Destroy(a.gameObject);
         Destroy(b.gameObject);
-        needSkinReset = true;
+        isVertexRescanNeeded = true;
 
         Vector3 mergePoint = a.gameObject.transform.position;
         GetComponent<AirController>().AddAir();
-        // StartCoroutine(CompleteMergeAfterDelay(otherBubble, mergePoint, mergeDelay));
-        CompleteMergeAfterDelay(otherBubble, mergePoint, mergeDelay);
-    }
 
-    /*IEnumerator*/void CompleteMergeAfterDelay(GameObject otherBubble, Vector3 mergePoint, float delay) {
-        // yield return new WaitForSeconds(delay);
         center.transform.position = mergePoint;
         ReparentToNewCenter(otherBubble);
         ReconnectToCenterAndIncreaseRadius(otherBubble.GetComponent<AutoBubble>().radius);
         Destroy(otherBubble);
-        needSkinReset = true;
+        isVertexRescanNeeded = true;
         Adjusthighlight();
-        // StartCoroutine(StartUnscrambleVertices());
+
+        StartCoroutine(StartUnscrambleVertices());
     }
+
+
 
     IEnumerator StartUnscrambleVertices() { // TODO: unify iteration with UpdateVertices
         yield return new WaitForSeconds(unscrambleDelay);
@@ -205,7 +204,7 @@ public class AutoBubble : MonoBehaviour
         if (Vector3.Dot(vecToNext.normalized, vecToPrev.normalized) > scrambleDotThreshold) {
             ReJoint(next, prev);
             Destroy(vertex);
-            needSkinReset = true;
+            isVertexRescanNeeded = true;
             // Debug.Log("Unscrambled " + vertex.name);
             return true;
         }
@@ -218,7 +217,7 @@ public class AutoBubble : MonoBehaviour
         var next = vertex.GetComponent<BubbleVertex>().nextVertex;
         ReJoint(next, prev);
         Destroy(vertex);
-        needSkinReset = true;
+        isVertexRescanNeeded = true;
         // Debug.Log("Pruned " + vertex.name);
     }
 
@@ -259,7 +258,7 @@ public class AutoBubble : MonoBehaviour
 
     void Wobble() 
     {
-        int j = UnityEngine.Random.Range(0, vertices.Count);
+        wobbleTimer += Time.deltaTime;
         for (int i = 0; i < vertices.Count; i++) 
         {
             // Vector2 randomVec = UnityEngine.Random.insideUnitCircle;
@@ -268,18 +267,21 @@ public class AutoBubble : MonoBehaviour
             //     randomVec * wobbleStrength, fmode);
             
             var vertex = vertices[i].gameObject.GetComponent<BubbleVertex>();
-            if (i == j) {
-                var rnd = UnityEngine.Random.value * 2 - 1;
-                vertex.jointToCenter.distance += wobbleDelta * vertex.jointToCenter.distance * rnd;
-            } else {
-                vertex.jointToCenter.distance = radius;
-            }
+            var x = wobbleTimer * wobbleSpeed;
+            var shift = 2*Mathf.PI*i/(vertices.Count-1);
+            vertex.jointToCenter.distance = radius +
+                Mathf.Cos((x + shift) * wobbleFrequency) * wobbleAmplitude;
            
         }
     }
 
-    void ResetSkin() {
-        UpdateVertices();
+    void UpdateSkin() {
+
+        if (isVertexRescanNeeded) {
+            UpdateVertices();
+            isVertexRescanNeeded = false;
+        }
+        
         skin.spline.Clear();
         int lastAddedIdx = -1;
         for (int i = 0, j = 0; i < vertices.Count; i++) 
@@ -287,7 +289,7 @@ public class AutoBubble : MonoBehaviour
             if (lastAddedIdx >= 0) {
                var seg = vertices[lastAddedIdx].localPosition - vertices[i].localPosition;
                if (seg.sqrMagnitude < s_DistanceTolerance) {
-                    Debug.Log("Spline. Skip vertex");
+                    // Debug.Log("Spline. Skip vertex");
                     continue;
                }
             }
@@ -303,33 +305,10 @@ public class AutoBubble : MonoBehaviour
                 lastAddedIdx = i;
                 j++;
             } catch (Exception ex) {
-                Debug.Log("Spline exception: " + ex);
+                // Debug.Log("Spline exception: " + ex);
             }
             
         }
-    }
-
-    void UpdateSkin() {
-        // if (needSkinReset) {
-        //     ResetSkin();
-        //     needSkinReset = false;
-        // }
-        ResetSkin();
-        // for (int i = 0; i < vertices.Count; i++) 
-        // {
-            // try 
-            // {
-            //     skin.spline.SetPosition(i, vertices[i].localPosition);
-            // } catch{}
-            
-
-            // Vector2 radius = vertices[i].localPosition - center.transform.localPosition;
-            // Vector2 tangent = Vector2.Perpendicular(radius);
-
-            // skin.spline.SetLeftTangent(i, tangent.normalized * skin.spline.GetLeftTangent(i).magnitude);
-            // skin.spline.SetRightTangent(i, -tangent.normalized * skin.spline.GetRightTangent(i).magnitude);
-            
-        // }
     }
 
     void UpdateVertices() {

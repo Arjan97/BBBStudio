@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class BubbleController : MonoBehaviour
 {
-    public float tapForce = 100f;
-    public float tapImpulse = 1f;
-    public float upForce = 1f;
-    public float windMagnitude = 0.02f;
+    public float tapBubbleForce = 0f;
+    public float tapBirdImpulse = 2f;
+    public float buoyancyMultiplier = 5f;
+    public float windMagnitude = 1f;
 
     public GameObject character;
     public AudioClip[] se;
@@ -70,13 +70,15 @@ public class BubbleController : MonoBehaviour
             gravityCoroutine = StartCoroutine(ChangeGravityForOneSecond());
             character.GetComponent<Animator>().SetTrigger("Drop");
 
-            autoBubble.PushBubble(new Vector2(0f, -tapForce));
-            charRb.AddForce(new Vector2(0f, -tapImpulse), ForceMode2D.Impulse);
+            autoBubble.PushBubble(new Vector2(0f, -tapBubbleForce));
+            charRb.AddForce(new Vector2(0f, -tapBirdImpulse), ForceMode2D.Impulse);
             audio.resource = se[Random.Range(0, se.Length)];
             audio.Play();
         }
 
-        autoBubble.PushBubble(new Vector2(0f, upForce * Time.deltaTime));
+        // bouyancy
+        var vol = Mathf.Pow(autoBubble.radius, 2);
+        autoBubble.PushBubble(new Vector2(0f, vol * buoyancyMultiplier * Time.deltaTime));
 
         if (windMagnitude > 0)
         {
