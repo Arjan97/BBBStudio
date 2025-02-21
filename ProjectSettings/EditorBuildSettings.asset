@@ -17,9 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 5916542ef5dee354d9663487ae424c70
+  - enabled: 0
+    path: Assets/Scenes/OldBrokenAlphaLevel.unity
+    guid: 419f2aa4e873ee144ac78fdbaa1caf10
   - enabled: 1
     path: Assets/Scenes/AlphaLevel.unity
-    guid: 419f2aa4e873ee144ac78fdbaa1caf10
+    guid: 5b595132a8105f34a9bb3a87f54a5727
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

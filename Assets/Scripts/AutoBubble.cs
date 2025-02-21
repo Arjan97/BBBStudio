@@ -16,6 +16,8 @@ public class AutoBubble : MonoBehaviour
     public float vertexMass = 0.1f;
     public float centerSpringFrequency = 4f;
     public float neighborSpringFrequency = 3f;
+    public float centerSpringDamping = 0f;
+    public float neighborSpringDamping = 1f;
     public float mergeDelay = 0.3f;
     public float unscrambleDelay = 0.3f;
     public float scrambleDotThreshold = 0.5f;
@@ -30,17 +32,21 @@ public class AutoBubble : MonoBehaviour
     public float minRadius = 0.25f;
     public int minVertexCount = 10;
     public int maxVertexCount = 20;
+    public float pruneMinDelay = 1f;
+    public GameObject center;
 
     List<Transform> vertices;
     float vertexScale = 0.1f;
     GameObject lastMergedBubble;
-    GameObject center;
+    
     float initialRadius;
     Vector3 initialHighlightScale;
     bool needSkinReset = false;
     bool isUnscrambling = false;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    float pruneTimer = 0f;
+    const float s_DistanceTolerance = 0.001f;
+
+    void Awake()
     {
         vertices = new List<Transform>();
         initialRadius = radius;
@@ -114,6 +120,7 @@ public class AutoBubble : MonoBehaviour
         joint1.autoConfigureDistance = false;
         joint1.distance = radius;
         joint1.frequency = centerSpringFrequency;
+        joint1.dampingRatio = centerSpringDamping;
         from.GetComponent<BubbleVertex>().jointToCenter = joint1;
     }
 
@@ -123,6 +130,7 @@ public class AutoBubble : MonoBehaviour
         joint2.connectedBody = to.GetComponent<Rigidbody2D>();
         joint2.autoConfigureDistance = true;
         joint2.frequency = neighborSpringFrequency;
+        joint2.dampingRatio = neighborSpringDamping;
         from.GetComponent<BubbleVertex>().jointToNeighbor = joint2;
     }
 
@@ -131,7 +139,7 @@ public class AutoBubble : MonoBehaviour
         if (lastMergedBubble == otherBubble) {
             return;
         }
-        Debug.Log("Merge bubbles! Collided vertices: " + a.gameObject.name + ", " + b.gameObject.name);
+        // Debug.Log("Merge bubbles! Collided vertices: " + a.gameObject.name + ", " + b.gameObject.name);
         lastMergedBubble = otherBubble;
 
         // Glue bubbles together
@@ -142,18 +150,20 @@ public class AutoBubble : MonoBehaviour
         needSkinReset = true;
 
         Vector3 mergePoint = a.gameObject.transform.position;
-        StartCoroutine(CompleteMergeAfterDelay(otherBubble, mergePoint, mergeDelay));
+        GetComponent<AirController>().AddAir();
+        // StartCoroutine(CompleteMergeAfterDelay(otherBubble, mergePoint, mergeDelay));
+        CompleteMergeAfterDelay(otherBubble, mergePoint, mergeDelay);
     }
 
-    IEnumerator CompleteMergeAfterDelay(GameObject otherBubble, Vector3 mergePoint, float delay) {
-        yield return new WaitForSeconds(delay);
+    /*IEnumerator*/void CompleteMergeAfterDelay(GameObject otherBubble, Vector3 mergePoint, float delay) {
+        // yield return new WaitForSeconds(delay);
         center.transform.position = mergePoint;
         ReparentToNewCenter(otherBubble);
         ReconnectToCenterAndIncreaseRadius(otherBubble.GetComponent<AutoBubble>().radius);
         Destroy(otherBubble);
         needSkinReset = true;
         Adjusthighlight();
-        StartCoroutine(StartUnscrambleVertices());
+        // StartCoroutine(StartUnscrambleVertices());
     }
 
     IEnumerator StartUnscrambleVertices() { // TODO: unify iteration with UpdateVertices
@@ -196,10 +206,20 @@ public class AutoBubble : MonoBehaviour
             ReJoint(next, prev);
             Destroy(vertex);
             needSkinReset = true;
-            Debug.Log("Unscrambled " + vertex.name);
+            // Debug.Log("Unscrambled " + vertex.name);
             return true;
         }
         return false;
+    }
+
+    void DeleteVertex(GameObject vertex) {
+        var pos = vertex.transform.position;
+        var prev = vertex.GetComponent<BubbleVertex>().prevVertex;
+        var next = vertex.GetComponent<BubbleVertex>().nextVertex;
+        ReJoint(next, prev);
+        Destroy(vertex);
+        needSkinReset = true;
+        // Debug.Log("Pruned " + vertex.name);
     }
 
     void ReparentToNewCenter(GameObject parent) {
@@ -216,7 +236,8 @@ public class AutoBubble : MonoBehaviour
     }
 
     void ReconnectToCenterAndIncreaseRadius(float otherRadius) {
-        float newRadius = Mathf.Sqrt(Mathf.Pow(radius, 2) + Mathf.Pow(otherRadius, 2));
+        float newRadius = Mathf.Sqrt(Mathf.Pow(radius, 2) + Mathf.Pow(otherRadius, 2)); // 2D
+        // float newRadius = Mathf.Pow(Mathf.Pow(radius, 3) + Mathf.Pow(otherRadius, 3), 1/3); // 3D
         radius = newRadius;
         foreach (Transform child in transform) {
             if (child.gameObject.TryGetComponent<BubbleVertex>(out var vertex)) {
@@ -260,10 +281,31 @@ public class AutoBubble : MonoBehaviour
     void ResetSkin() {
         UpdateVertices();
         skin.spline.Clear();
-        for (int i = 0; i < vertices.Count; i++) 
+        int lastAddedIdx = -1;
+        for (int i = 0, j = 0; i < vertices.Count; i++) 
         {
-            skin.spline.InsertPointAt(i, vertices[i].localPosition);
-            skin.spline.SetTangentMode(i, ShapeTangentMode.Continuous);
+            if (lastAddedIdx >= 0) {
+               var seg = vertices[lastAddedIdx].localPosition - vertices[i].localPosition;
+               if (seg.sqrMagnitude < s_DistanceTolerance) {
+                    Debug.Log("Spline. Skip vertex");
+                    continue;
+               }
+            }
+            try {
+                skin.spline.InsertPointAt(j, vertices[i].localPosition);
+                skin.spline.SetTangentMode(j, ShapeTangentMode.Continuous);
+
+                Vector2 radius = vertices[i].localPosition - center.transform.localPosition;
+                Vector2 tangent = Vector2.Perpendicular(radius);
+
+                skin.spline.SetLeftTangent(j, tangent.normalized * skin.spline.GetLeftTangent(j).magnitude);
+                skin.spline.SetRightTangent(j, -tangent.normalized * skin.spline.GetRightTangent(j).magnitude);
+                lastAddedIdx = i;
+                j++;
+            } catch (Exception ex) {
+                Debug.Log("Spline exception: " + ex);
+            }
+            
         }
     }
 
@@ -273,30 +315,32 @@ public class AutoBubble : MonoBehaviour
         //     needSkinReset = false;
         // }
         ResetSkin();
-        for (int i = 0; i < vertices.Count; i++) 
-        {
-            try 
-            {
-                skin.spline.SetPosition(i, vertices[i].localPosition);
-            } catch{}
+        // for (int i = 0; i < vertices.Count; i++) 
+        // {
+            // try 
+            // {
+            //     skin.spline.SetPosition(i, vertices[i].localPosition);
+            // } catch{}
             
 
-            Vector2 radius = vertices[i].localPosition - center.transform.localPosition;
-            Vector2 tangent = Vector2.Perpendicular(radius);
+            // Vector2 radius = vertices[i].localPosition - center.transform.localPosition;
+            // Vector2 tangent = Vector2.Perpendicular(radius);
 
-            skin.spline.SetLeftTangent(i, tangent.normalized * skin.spline.GetLeftTangent(i).magnitude);
-            skin.spline.SetRightTangent(i, -tangent.normalized * skin.spline.GetRightTangent(i).magnitude);
+            // skin.spline.SetLeftTangent(i, tangent.normalized * skin.spline.GetLeftTangent(i).magnitude);
+            // skin.spline.SetRightTangent(i, -tangent.normalized * skin.spline.GetRightTangent(i).magnitude);
             
-        }
+        // }
     }
 
     void UpdateVertices() {
         vertices.Clear();
         GameObject firstVertex = null;
+        // find first vertex child
         foreach (Transform t in transform) {
             if(t.gameObject.TryGetComponent<BubbleVertex>(out var vertex)) {
                 if(vertex.prevVertex != null) {
                     firstVertex = vertex.gameObject;
+                    break;
                 }
             }
         }
@@ -315,7 +359,6 @@ public class AutoBubble : MonoBehaviour
 
     void Deflate() {
         // decrease radius and circle segment length
-        // occasionaly remove vertices -> another procedure
         if (radius <= minRadius) {
             // Debug.Log("Deflated to minimum radius");
             return;
@@ -340,12 +383,38 @@ public class AutoBubble : MonoBehaviour
                 }
             }
         }
+        
+        // occasionaly remove vertices to keep them in limits
+        PruneVertices();
+    }
+
+    void PruneVertices() {
+        pruneTimer += Time.deltaTime;
+        if (vertices.Count < maxVertexCount) {
+            return;
+        }
+        if (pruneTimer > pruneMinDelay) {
+            pruneTimer = 0;
+
+            int j = UnityEngine.Random.Range(0, vertices.Count);
+            DeleteVertex(vertices[j].gameObject);
+        } 
+        
     }
 
     void Adjusthighlight() {
         var vec = highlight.transform.localPosition.normalized * radius;
         highlight.transform.position = vec + center.transform.position;
         highlight.transform.localScale = initialHighlightScale * radius / initialRadius;
+    }
+
+    public void PushBubble(Vector2 dir) {
+        foreach (var ver in vertices) {
+            if(ver == null) {
+                continue;
+            }
+            ver.GetComponent<Rigidbody2D>().AddForce(dir);
+        }
     }
 
 }

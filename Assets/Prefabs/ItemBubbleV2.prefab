@@ -1950,9 +1950,9 @@ SpriteShapeRenderer:
   m_SortingOrder: 10
   m_Color: {r: 0.48867923, g: 0.9135087, b: 1, a: 1}
   m_MaskInteraction: 0
-  m_ShapeTexture: {fileID: 2800000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
+  m_ShapeTexture: {fileID: 2800000, guid: d5e7316f87629424cb46b0c21bcf19a3, type: 3}
   m_Sprites:
-  - {fileID: 4896199551636009536, guid: e60b9a2f83c2c7248baa65b5c0be2476, type: 3}
+  - {fileID: 2749944388111595417, guid: 527889a1ccef99c4f98a58ce86924148, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -1962,8 +1962,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
-    m_Center: {x: 0.02700746, y: 0.008265853, z: 0}
-    m_Extent: {x: 1.0655254, y: 1.0411721, z: 0}
+    m_Center: {x: 0.026996702, y: 0.008328766, z: 0}
+    m_Extent: {x: 0.45220944, y: 0.42791742, z: 0}
   m_SpriteSortPoint: 0
 --- !u!114 &6280649155281590493
 MonoBehaviour:

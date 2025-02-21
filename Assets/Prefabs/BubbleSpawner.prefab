@@ -45,11 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPool:
-  - {fileID: 758921968602607119, guid: c06c7a80567b14047aa1fc8353b3a2a6, type: 3}
-  minSpawnInterval: 1
-  maxSpawnInterval: 6
+  - {fileID: 7357158264887903837, guid: 766200f304f70054d863d267d8b9b7f3, type: 3}
+  minSpawnInterval: 2.5
+  maxSpawnInterval: 5
   minY: -5
   maxY: 5
   spawnXOffset: 10
   isBuilding: 0
-  yPadding: 0.3
+  buildingY: -5.2
+  spawnFromScore: 0
