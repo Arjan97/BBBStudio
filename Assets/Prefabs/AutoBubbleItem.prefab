@@ -358,13 +358,14 @@ MonoBehaviour:
   vertexPrefab: {fileID: 6131820820229082203, guid: 75e7a1aab34b90d4cb3cf9b0bf32a940, type: 3}
   skin: {fileID: 5608739876218467389}
   highlight: {fileID: 8109042954863460201}
+  borderCollider: {fileID: 0}
   radius: 0.5
   segmentCount: 22
-  vertexRadius: 0.03
-  vertexMass: 0.1
+  vertexRadius: 0.05
+  vertexMass: 0.08
   centerSpringFrequency: 3
   neighborSpringFrequency: 4
-  centerSpringDamping: 0
+  centerSpringDamping: 0.5
   neighborSpringDamping: 1
   unscrambleDelay: 0.3
   scrambleDotThreshold: 0.5

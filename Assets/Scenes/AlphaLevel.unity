@@ -585,7 +585,7 @@ GameObject:
   - component: {fileID: 741546696}
   - component: {fileID: 741546694}
   - component: {fileID: 741546693}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Character
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -981,8 +981,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tapBubbleForce: 0
   tapBirdImpulse: 2
-  buoyancyMultiplier: 10
-  windMagnitude: 1
+  buoyancyMultiplier: 5
+  windMagnitude: 10
   character: {fileID: 741546692}
   se:
   - {fileID: 8300000, guid: b55ad716233489145843a4e66db16192, type: 3}
@@ -2629,6 +2629,7 @@ MonoBehaviour:
   vertexPrefab: {fileID: 6131820820229082203, guid: 75e7a1aab34b90d4cb3cf9b0bf32a940, type: 3}
   skin: {fileID: 3564651426971048110}
   highlight: {fileID: 8109042956425545535}
+  borderCollider: {fileID: 0}
   radius: 0.6
   segmentCount: 22
   vertexRadius: 0.05

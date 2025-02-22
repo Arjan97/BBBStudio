@@ -10,6 +10,7 @@ public class AutoBubble : MonoBehaviour
     public GameObject vertexPrefab;
     public SpriteShapeController skin;
     public GameObject highlight;
+    public GameObject borderCollider;
     public float radius = 0.4f;
     public int segmentCount = 12;
     public float vertexRadius = 0.05f;
@@ -45,7 +46,7 @@ public class AutoBubble : MonoBehaviour
     bool isVertexRescanNeeded = true;
     bool isUnscrambling = false;
     float pruneTimer = 0f;
-    const float s_DistanceTolerance = 0.01f;//0.001f;
+    const float s_DistanceTolerance = 0.001f;
     public float wobbleTimer = 0f;
 
     void Awake()
@@ -297,8 +298,8 @@ public class AutoBubble : MonoBehaviour
                 skin.spline.InsertPointAt(j, vertices[i].localPosition);
                 skin.spline.SetTangentMode(j, ShapeTangentMode.Continuous);
 
-                Vector2 radius = vertices[i].localPosition - center.transform.localPosition;
-                Vector2 tangent = Vector2.Perpendicular(radius);
+                Vector2 rad = vertices[i].localPosition - center.transform.localPosition;
+                Vector2 tangent = Vector2.Perpendicular(rad);
 
                 skin.spline.SetLeftTangent(j, tangent.normalized * skin.spline.GetLeftTangent(j).magnitude);
                 skin.spline.SetRightTangent(j, -tangent.normalized * skin.spline.GetRightTangent(j).magnitude);

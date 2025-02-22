@@ -26,12 +26,26 @@ public class BubbleController : MonoBehaviour
         input = new InputSystem_Actions();
         input.Player.Enable();
         audio = GetComponent<AudioSource>();
-        bubbleCenterRb = GetComponent<AutoBubble>().center.GetComponent<Rigidbody2D>();
+        
+        autoBubble = GetComponent<AutoBubble>();
+        bubbleCenterRb = autoBubble.center.GetComponent<Rigidbody2D>();
         character.GetComponent<SpringJoint2D>().connectedBody = bubbleCenterRb;
         charRb = character.GetComponent<Rigidbody2D>();
-
-        autoBubble = GetComponent<AutoBubble>();
     }
+
+    void FixedUpdate()
+    {
+        // keep character within limits
+        Vector2 offset = charRb.position - bubbleCenterRb.position;
+        var r = autoBubble.radius;
+        // var r = 0.3f;
+        if (offset.magnitude > r) {
+            charRb.position = bubbleCenterRb.position + offset.normalized * r;
+            // charRb.linearVelocity = Vector2.zero;
+            charRb.linearVelocity = -charRb.linearVelocity/2;
+        }
+    }
+
     // private void OnEnable()
     // {
     //     // Enable input only in gameplay scenes
@@ -77,12 +91,13 @@ public class BubbleController : MonoBehaviour
         }
 
         // bouyancy
-        var vol = Mathf.Pow(autoBubble.radius, 2);
+        // var vol = Mathf.Pow(autoBubble.radius, 2);
+        var vol = autoBubble.radius;
         autoBubble.PushBubble(new Vector2(0f, vol * buoyancyMultiplier * Time.deltaTime));
 
         if (windMagnitude > 0)
         {
-            float force = -bubbleCenterRb.gameObject.transform.position.x * windMagnitude;
+            float force = -bubbleCenterRb.linearVelocity.x * windMagnitude;
             autoBubble.PushBubble(new Vector2(force * Time.deltaTime, 0f));
         }
     }
