@@ -97,9 +97,11 @@ public class BubbleController : MonoBehaviour
 
         if (windMagnitude > 0)
         {
-            float force = -bubbleCenterRb.linearVelocity.x * windMagnitude;
+            float force = (-bubbleCenterRb.linearVelocity.x - bubbleCenterRb.gameObject.transform.position.x) * windMagnitude;
+            // bubbleCenterRb.AddForce(new Vector2(force * Time.deltaTime, 0f));
             autoBubble.PushBubble(new Vector2(force * Time.deltaTime, 0f));
         }
+        Debug.Log("x: " + bubbleCenterRb.gameObject.transform.position.x + "; vel.x: " + bubbleCenterRb.linearVelocity.x);
     }
 
     private IEnumerator ChangeGravityForOneSecond()
