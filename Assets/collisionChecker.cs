@@ -9,10 +9,13 @@ public class collisionChecker : MonoBehaviour
     public bool isCeiling = false;
     public bool isWall = false;
     private PlayerController playerC;
-
+    private AutoBubble autoBubble;
+    private GameObject playerBubble;
     private void Awake()
     {
         playerC = FindFirstObjectByType<PlayerController>();
+        playerBubble = GameObject.FindGameObjectWithTag("PlayerBubble");
+        autoBubble = playerBubble.GetComponent<AutoBubble>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -63,9 +66,9 @@ public class collisionChecker : MonoBehaviour
             }
         }
 
-        if (bubbleBar != null)
+        if (autoBubble != null)
         {
-            bubbleBar.AddValue(adjustedValueToAdd);
+            autoBubble.DecreaseRadiusByAmount(adjustedValueToAdd);
         }
 
         if (playerC != null)

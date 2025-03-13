@@ -17,6 +17,9 @@ public class Shark : MonoBehaviour
     private bool canAttack = true;
     private GameObject player;
     private float initialY;
+    private GameObject bubble;
+
+    private AutoBubble autoBubble;
 
     private void Start()
     {
@@ -31,6 +34,12 @@ public class Shark : MonoBehaviour
         if (player == null)
         {
             Debug.LogError("Player not found.");
+        }
+
+        bubble = GameObject.FindGameObjectWithTag("PlayerBubble");
+        if (autoBubble == null)
+        {
+            autoBubble = bubble.GetComponent<AutoBubble>();
         }
     }
 
@@ -75,12 +84,9 @@ public class Shark : MonoBehaviour
             PlayerController playerController = collision.GetComponent<PlayerController>();
             if (playerController != null && playerController.CanTakeHit())
             {
-                BubbleBar bubbleBar = FindFirstObjectByType<BubbleBar>();
-                if (bubbleBar != null)
+                if (autoBubble != null)
                 {
-                    bubbleBar.currentValue -= bubbleBarReduction;
-                    bubbleBar.currentValue = Mathf.Max(bubbleBar.currentValue, 0);
-                    bubbleBar.FlashBubbleBarColor();
+                    autoBubble.DecreaseRadiusByAmount(bubbleBarReduction);
                 }
 
                 playerController.RegisterHit();

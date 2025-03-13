@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a9d586ef21bdc4882cfb33c14b90b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bubbleBarReduction: 20
+  bubbleBarReduction: 0.1
   attackCooldown: 0.75
   detectionRange: 4
   attackRange: 3

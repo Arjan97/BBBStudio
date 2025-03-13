@@ -1321,6 +1321,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BubbleMeterV2
       objectReference: {fileID: 0}
+    - target: {fileID: 3113338840341271304, guid: 78ce3dfcdb08d9245a7c6729ad344ebe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3402850761452456151, guid: 78ce3dfcdb08d9245a7c6729ad344ebe, type: 3}
       propertyPath: m_fontSize
       value: 108.9
@@ -1425,6 +1429,10 @@ PrefabInstance:
       propertyPath: comboText
       value: 
       objectReference: {fileID: 1350425137}
+    - target: {fileID: 6082603090016774690, guid: 78ce3dfcdb08d9245a7c6729ad344ebe, type: 3}
+      propertyPath: autoBubble
+      value: 
+      objectReference: {fileID: 7737070714875758684}
     - target: {fileID: 6082603090016774690, guid: 78ce3dfcdb08d9245a7c6729ad344ebe, type: 3}
       propertyPath: hitColor.a
       value: 0.9019608
@@ -2640,7 +2648,7 @@ GameObject:
   - component: {fileID: 7737070714875758685}
   m_Layer: 0
   m_Name: PlayerV4
-  m_TagString: Player
+  m_TagString: PlayerBubble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2690,6 +2698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48b283fd556f7664e9a95612b9eb8cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOverRadius: 0.22
   vertexPrefab: {fileID: 6131820820229082203, guid: 75e7a1aab34b90d4cb3cf9b0bf32a940, type: 3}
   skin: {fileID: 3564651426971048110}
   highlight: {fileID: 8109042956425545535}
@@ -2709,8 +2718,8 @@ MonoBehaviour:
   wobbleFrequency: 2
   wobbleSpeed: 5
   isDeflating: 1
-  deflateSpeed: 0.03
-  minRadius: 0.4
+  deflateSpeed: 0.02
+  minRadius: 0.2
   minVertexCount: 22
   maxVertexCount: 30
   pruneMinDelay: 0.1

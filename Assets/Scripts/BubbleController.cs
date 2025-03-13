@@ -101,7 +101,6 @@ public class BubbleController : MonoBehaviour
             // bubbleCenterRb.AddForce(new Vector2(force * Time.deltaTime, 0f));
             autoBubble.PushBubble(new Vector2(force * Time.deltaTime, 0f));
         }
-        Debug.Log("x: " + bubbleCenterRb.gameObject.transform.position.x + "; vel.x: " + bubbleCenterRb.linearVelocity.x);
     }
 
     private IEnumerator ChangeGravityForOneSecond()

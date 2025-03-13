@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.Android.Gradle;
 
 public class SeaDevil : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class SeaDevil : MonoBehaviour
     public float attackRange = 1f;
     private GameObject player;
     private Animator animator;
+    private AutoBubble autoBubble;
+    private GameObject bubble;
 
     private void Start()
     {
@@ -25,6 +28,11 @@ public class SeaDevil : MonoBehaviour
         if (animator == null)
         {
             Debug.LogError("Animator not found on SeaDevil.");
+        }
+        bubble = GameObject.FindGameObjectWithTag("PlayerBubble");
+        if (autoBubble == null)
+        {
+            autoBubble = bubble.GetComponent<AutoBubble>();
         }
     }
 
@@ -48,15 +56,12 @@ public class SeaDevil : MonoBehaviour
             PlayerController playerController = collision.GetComponent<PlayerController>();
             if (playerController != null && playerController.CanTakeHit())
             {
-                BubbleBar bubbleBar = FindFirstObjectByType<BubbleBar>();
-                if (bubbleBar != null)
+                if (autoBubble != null)
                 {
-                    bubbleBar.currentValue -= bubbleBarReduction;
-                    bubbleBar.currentValue = Mathf.Max(bubbleBar.currentValue, 0);
-                    bubbleBar.FlashBubbleBarColor();
+                    autoBubble.DecreaseRadiusByAmount(bubbleBarReduction);
                 }
 
-                    playerController.RegisterHit();
+                playerController.RegisterHit();
             }
         }
     }

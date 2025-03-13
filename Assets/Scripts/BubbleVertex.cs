@@ -19,7 +19,7 @@ public class BubbleVertex : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if(!transform.parent.CompareTag("Player")) {
+        if(!transform.parent.CompareTag("PlayerBubble")) {
             return;
         }
         if(!other.collider.TryGetComponent<BubbleVertex>(out var otherVertex)) {

@@ -10,11 +10,16 @@ public class SeaUrchin : MonoBehaviour
     public float detectionRange = 5f; 
     public float attackRange = 2f;
     private GameObject player;
+    private GameObject bubble;
+
+    private AutoBubble autoBubble;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
+        bubble = GameObject.FindGameObjectWithTag("PlayerBubble");
+
         if (animator == null)
         {
             Debug.LogError("Animator component not found on this object.");
@@ -23,6 +28,11 @@ public class SeaUrchin : MonoBehaviour
         {
             Debug.LogError("Player  not found.");
         }
+        if (autoBubble == null)
+        {
+            autoBubble = bubble.GetComponent<AutoBubble>();
+        }
+
     }
 
     private void Update()
@@ -45,14 +55,15 @@ public class SeaUrchin : MonoBehaviour
             PlayerController playerController = collision.GetComponent<PlayerController>();
             if (playerController != null && playerController.CanTakeHit())
             {
-                BubbleBar bubbleBar = FindFirstObjectByType<BubbleBar>();
-                if (bubbleBar != null)
+                if (autoBubble != null)
                 {
-                    bubbleBar.currentValue -= bubbleBarReduction;
-                    bubbleBar.currentValue = Mathf.Max(bubbleBar.currentValue, 0);
-                    bubbleBar.FlashBubbleBarColor();
+                    autoBubble.DecreaseRadiusByAmount(bubbleBarReduction);
+                    Debug.Log("decreasing" + bubbleBarReduction);
+                } else 
+                {
+                    Debug.Log("AutoBubble not found on player.");
                 }
-                    playerController.RegisterHit();
+                playerController.RegisterHit();
             }
         }
     }

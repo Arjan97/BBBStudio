@@ -10,7 +10,7 @@ public class BubbleBar : MonoBehaviour
     public float decreaseRate = 5f;
     public float currentValue;
     public Slider bubbleSlider;
-
+    public AutoBubble autoBubble;
     public TMP_Text scoreText;
     public TMP_Text comboText; 
     public float scoreIncreaseRate = 50f;
@@ -34,7 +34,16 @@ public class BubbleBar : MonoBehaviour
     {
         audio = GetComponent<AudioSource>();
         currentValue = maxValue;
-        playerController = FindObjectOfType<PlayerController>();
+
+        if (playerController == null)
+        {
+            playerController = FindObjectOfType<PlayerController>();
+        }
+
+        if (autoBubble == null)
+        {
+            autoBubble = FindObjectOfType<AutoBubble>();
+        }
 
         if (bubbleSlider != null)
         {
@@ -71,20 +80,10 @@ public class BubbleBar : MonoBehaviour
                 scoreText.text = Mathf.CeilToInt(displayedScore).ToString();
             }
         }
-
-        if (currentValue > 0)
-        {
-            currentValue -= decreaseRate * Time.deltaTime;
-            currentValue = Mathf.Max(currentValue, 0);
-        }
-        else
+        //checks bubble radius to set game over
+        if (autoBubble != null && autoBubble.radius <= autoBubble.gameOverRadius)
         {
             TriggerGameOver();
-        }
-
-        if (bubbleSlider != null)
-        {
-            bubbleSlider.value = currentValue;
         }
     }
 

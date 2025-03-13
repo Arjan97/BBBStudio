@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class AutoBubble : MonoBehaviour
 {
+    public float gameOverRadius = 0.23f;
+
     public GameObject vertexPrefab;
     public SpriteShapeController skin;
     public GameObject highlight;
@@ -31,7 +33,7 @@ public class AutoBubble : MonoBehaviour
 
     public bool isDeflating = false;
     public float deflateSpeed = 0.1f;
-    public float minRadius = 0.25f;
+    public float minRadius = 0.2f;
     public int minVertexCount = 10;
     public int maxVertexCount = 20;
     public float pruneMinDelay = 1f;
@@ -336,6 +338,39 @@ public class AutoBubble : MonoBehaviour
             }
         }
     }
+    public void DecreaseRadiusByAmount(float amount)
+    {
+        // If the radius is already at or below the minimum, don't decrease further.
+        if (radius <= minRadius)
+            return;
+
+        // Decrease the radius, clamping it to minRadius.
+        radius = Mathf.Max(radius - amount, minRadius);
+
+        // Update the highlight to match the new radius.
+        Adjusthighlight();
+
+        // Recalculate the segment length based on the new radius.
+        float seg_len = 2 * Mathf.PI * radius / segmentCount;
+
+        // Update each vertex's joint distances.
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.TryGetComponent<BubbleVertex>(out var vertex))
+            {
+                var centerJoint = vertex.jointToCenter;
+                if (centerJoint != null)
+                {
+                    centerJoint.distance = radius;
+                }
+                var neighborJoint = vertex.jointToNeighbor;
+                if (neighborJoint != null)
+                {
+                    neighborJoint.distance = seg_len;
+                }
+            }
+        }
+    }
 
     void Deflate() {
         // decrease radius and circle segment length
@@ -363,7 +398,6 @@ public class AutoBubble : MonoBehaviour
                 }
             }
         }
-        
         // occasionaly remove vertices to keep them in limits
         PruneVertices();
     }
